@@ -22,7 +22,8 @@ public class EVController {
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("X-API-Key",  REACT_APP_OPENCHARGERMAP);
-        ResponseEntity<ResponseObject> response = restTemplate.exchange(url, HttpMethod.GET, entity, ResponseObject.class);
+        // ResponseEntity<ResponseObject> response = restTemplate.exchange(url, HttpMethod.GET, entity, ResponseObject.class);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
 
         System.out.println(response);
 //        return response;
