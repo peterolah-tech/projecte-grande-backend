@@ -25,8 +25,8 @@ public class GroundController {
         return groundService.getGroundData(jsonString);
     }
 
-    @GetMapping("/ground-transport")
-    public String sayHello() {
-        return "Hello WOrld!";
-    }
+//    @GetMapping("/ground-transport")
+//    public String sayHello() {
+//        return "Hello WOrld!";
+//    }
 }

@@ -4,8 +4,6 @@ import com.codecool.projectegrandebackend.model.ground_trsport_generated.GroundT
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,7 +19,6 @@ public class GroundService {
 
     public GroundTransport getGroundData(String jsonString){
         RestTemplate restTemplate = new RestTemplate();
-        System.out.println(jsonString);
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(jsonString, headers);
         headers.setContentType(MediaType.APPLICATION_JSON);

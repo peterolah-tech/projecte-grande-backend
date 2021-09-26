@@ -28,8 +28,8 @@ public class RenewableEnergyCertificate{
 	@JsonProperty("total_capacity")
 	private String total_capacity;
 
-	@JsonProperty("latlng")
-	private String latlng;
+//	@JsonProperty("latlng")
+//	private String latlng;
 
 	@JsonProperty("technical_details")
 	private String technical_details;
@@ -66,9 +66,9 @@ public class RenewableEnergyCertificate{
 		return total_capacity;
 	}
 
-	public String getLatlng(){
-		return latlng;
-	}
+//	public String getLatlng(){
+//		return latlng;
+//	}
 
 	public String getTechnicalDetails(){
 		return technical_details;
