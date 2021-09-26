@@ -4,6 +4,8 @@ import com.codecool.projectegrandebackend.model.ground_trsport_generated.GroundT
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,20 +13,21 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class GroundService {
 
-    @Value("${ REACT_APP_API_KEY_CLOVERLY }")
+    @Value("${REACT_APP_API_KEY_CLOVERLY}")
     private String API_KEY_CLOVERLY;
-    @Value("${ Ground_Transport_URL }")
+    @Value("${Ground_Transport_URL}")
     private String url;
 
 
     public GroundTransport getGroundData(){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
+
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization",  API_KEY_CLOVERLY);
-        ResponseEntity<GroundTransport> groundResponseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, GroundTransport.class);
-
+        ResponseEntity<GroundTransport> groundResponseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, GroundTransport.class);
         return groundResponseEntity.getBody();
     }
+
 }
