@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Offset{
 
 	@JsonProperty("available_carbon_in_kg")
-	private String availableCarbonInKg;
+	private String available_carbon_in_kg;
 
 	@JsonProperty("country")
 	private String country;
@@ -17,31 +17,31 @@ public class Offset{
 	private String city;
 
 	@JsonProperty("offset_type")
-	private String offsetType;
+	private String offset_type;
 
 	@JsonProperty("offset_type_slug")
-	private String offsetTypeSlug;
+	private String offset_type_slug;
 
 	@JsonProperty("name")
 	private String name;
 
 	@JsonProperty("pretty_url")
-	private String prettyUrl;
+	private String pretty_url;
 
 	@JsonProperty("slug")
 	private String slug;
 
 	@JsonProperty("total_capacity")
-	private String totalCapacity;
+	private String total_capacity;
 
 	@JsonProperty("latlng")
 	private String latlng;
 
 	@JsonProperty("technical_details")
-	private String technicalDetails;
+	private String technical_details;
 
 	public String getAvailableCarbonInKg(){
-		return availableCarbonInKg;
+		return available_carbon_in_kg;
 	}
 
 	public String getCountry(){
@@ -57,11 +57,11 @@ public class Offset{
 	}
 
 	public String getOffsetType(){
-		return offsetType;
+		return offset_type;
 	}
 
 	public String getOffsetTypeSlug(){
-		return offsetTypeSlug;
+		return offset_type_slug;
 	}
 
 	public String getName(){
@@ -69,7 +69,7 @@ public class Offset{
 	}
 
 	public String getPrettyUrl(){
-		return prettyUrl;
+		return pretty_url;
 	}
 
 	public String getSlug(){
@@ -77,7 +77,7 @@ public class Offset{
 	}
 
 	public String getTotalCapacity(){
-		return totalCapacity;
+		return total_capacity;
 	}
 
 	public String getLatlng(){
@@ -85,6 +85,6 @@ public class Offset{
 	}
 
 	public String getTechnicalDetails(){
-		return technicalDetails;
+		return technical_details;
 	}
 }

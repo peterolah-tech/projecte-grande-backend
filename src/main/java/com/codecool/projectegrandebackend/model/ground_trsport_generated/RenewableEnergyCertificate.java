@@ -14,7 +14,7 @@ public class RenewableEnergyCertificate{
 	private String city;
 
 	@JsonProperty("renewable_type")
-	private String renewableType;
+	private String renewable_type;
 
 	@JsonProperty("deprecated")
 	private String deprecated;
@@ -26,13 +26,13 @@ public class RenewableEnergyCertificate{
 	private String slug;
 
 	@JsonProperty("total_capacity")
-	private String totalCapacity;
+	private String total_capacity;
 
 	@JsonProperty("latlng")
 	private String latlng;
 
 	@JsonProperty("technical_details")
-	private String technicalDetails;
+	private String technical_details;
 
 	public String getCountry(){
 		return country;
@@ -47,7 +47,7 @@ public class RenewableEnergyCertificate{
 	}
 
 	public String getRenewableType(){
-		return renewableType;
+		return renewable_type;
 	}
 
 	public String getDeprecated(){
@@ -63,7 +63,7 @@ public class RenewableEnergyCertificate{
 	}
 
 	public String getTotalCapacity(){
-		return totalCapacity;
+		return total_capacity;
 	}
 
 	public String getLatlng(){
@@ -71,6 +71,6 @@ public class RenewableEnergyCertificate{
 	}
 
 	public String getTechnicalDetails(){
-		return technicalDetails;
+		return technical_details;
 	}
 }

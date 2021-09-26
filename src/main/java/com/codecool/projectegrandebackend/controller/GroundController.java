@@ -22,7 +22,7 @@ public class GroundController {
     public GroundTransport getGroundTransport(@RequestBody GroundPostInput inputData) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
-        return groundService.getGroundData();
+        return groundService.getGroundData(jsonString);
     }
 
     @GetMapping("/ground-transport")

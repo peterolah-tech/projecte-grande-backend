@@ -19,11 +19,11 @@ public class GroundService {
     private String url;
 
 
-    public GroundTransport getGroundData(){
+    public GroundTransport getGroundData(String jsonString){
         RestTemplate restTemplate = new RestTemplate();
+        System.out.println(jsonString);
         HttpHeaders headers = new HttpHeaders();
-
-        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+        HttpEntity<String> entity = new HttpEntity<>(jsonString, headers);
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization",  API_KEY_CLOVERLY);
         ResponseEntity<GroundTransport> groundResponseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, GroundTransport.class);

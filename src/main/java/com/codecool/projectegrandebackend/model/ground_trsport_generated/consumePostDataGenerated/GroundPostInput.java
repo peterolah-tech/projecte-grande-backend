@@ -8,21 +8,21 @@ public class GroundPostInput{
 	private Distance distance;
 
 	@JsonProperty("fuel_efficiency")
-	private FuelEfficiency fuelEfficiency;
+	private FuelEfficiency fuel_efficiency;
 
 	public Distance getDistance(){
 		return distance;
 	}
 
 	public FuelEfficiency getFuelEfficiency(){
-		return fuelEfficiency;
+		return fuel_efficiency;
 	}
 
 	@Override
 	public String toString() {
 		return "GroundPostInput{" +
 				"distance=" + distance +
-				", fuelEfficiency=" + fuelEfficiency +
+				", fuelEfficiency=" + fuel_efficiency +
 				'}';
 	}
 }
