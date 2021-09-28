@@ -1,11 +1,13 @@
 package com.codecool.projectegrandebackend.model.FLGHT_generated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class Offset{
 
 	@JsonProperty("available_carbon_in_kg")
-	private String available_carbon_in_kg;
+	private String availableCarbonInKg;
 
 	@JsonProperty("country")
 	private String country;
@@ -17,74 +19,26 @@ public class Offset{
 	private String city;
 
 	@JsonProperty("offset_type")
-	private String offset_type;
+	private String offsetType;
 
 	@JsonProperty("offset_type_slug")
-	private String offset_type_slug;
+	private String offsetTypeSlug;
 
 	@JsonProperty("name")
 	private String name;
 
 	@JsonProperty("pretty_url")
-	private String pretty_url;
+	private String prettyUrl;
 
 	@JsonProperty("slug")
 	private String slug;
 
 	@JsonProperty("total_capacity")
-	private String total_capacity;
+	private String totalCapacity;
 
 //	@JsonProperty("latlng")
 //	private String latlng;
 
 	@JsonProperty("technical_details")
-	private String technical_details;
-
-	public String getAvailableCarbonInKg(){
-		return available_carbon_in_kg;
-	}
-
-	public String getCountry(){
-		return country;
-	}
-
-	public String getProvince(){
-		return province;
-	}
-
-	public String getCity(){
-		return city;
-	}
-
-	public String getOffsetType(){
-		return offset_type;
-	}
-
-	public String getOffsetTypeSlug(){
-		return offset_type_slug;
-	}
-
-	public String getName(){
-		return name;
-	}
-
-	public String getPrettyUrl(){
-		return pretty_url;
-	}
-
-	public String getSlug(){
-		return slug;
-	}
-
-	public String getTotalCapacity(){
-		return total_capacity;
-	}
-
-//	public String getLatlng(){
-//		return latlng;
-//	}
-
-	public String getTechnicalDetails(){
-		return technical_details;
-	}
+	private String technicalDetails;
 }

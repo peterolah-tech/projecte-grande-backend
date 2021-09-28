@@ -2,13 +2,12 @@ package com.codecool.projectegrandebackend.model.FLGHT_generated.flightPostInput
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class FlightPostInput{
 
 	@JsonProperty("airports")
 	private List<String> airports;
 
-	public List<String> getAirports(){
-		return airports;
-	}
 }

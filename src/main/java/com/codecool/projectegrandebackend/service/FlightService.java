@@ -23,8 +23,8 @@ public class FlightService {
         HttpEntity<String> entity = new HttpEntity<>(jsonString, headers);
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization",  API_KEY_CLOVERLY);
-        ResponseEntity<FlightTransport> groundResponseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, FlightTransport.class);
-        return groundResponseEntity.getBody();
+        ResponseEntity<FlightTransport> flightResponseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, FlightTransport.class);
+        return flightResponseEntity.getBody();
     }
 
 }
