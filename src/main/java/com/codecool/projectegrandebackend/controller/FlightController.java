@@ -21,7 +21,7 @@ public class FlightController {
             value = "/flight-transport",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String getGroundTransport(@RequestBody FlightPostInput inputData) {
+    public String getFlightTransport(@RequestBody FlightPostInput inputData) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         return flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
