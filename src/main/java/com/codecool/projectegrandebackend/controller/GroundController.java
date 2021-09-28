@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1")
 @RestController
 public class GroundController {
 
@@ -19,14 +19,10 @@ public class GroundController {
             value = "/ground-transport",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public GroundTransport getGroundTransport(@RequestBody GroundPostInput inputData) {
+    public String getGroundTransport(@RequestBody GroundPostInput inputData) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
-        return groundService.getGroundData(jsonString);
+        return groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
     }
-
-//    @GetMapping("/ground-transport")
-//    public String sayHello() {
-//        return "Hello WOrld!";
-//    }
+    
 }
