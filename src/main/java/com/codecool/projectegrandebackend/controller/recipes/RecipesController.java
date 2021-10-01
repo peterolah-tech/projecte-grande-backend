@@ -13,7 +13,7 @@ public class RecipesController {
     @Autowired
     private RecipesApiService recipesApiService;
 
-    @GetMapping("/recipes/{cuisine}/{diet}")
+    @GetMapping("api/v1/recipes/{cuisine}/{diet}")
     public Recipes getRecipesByCuisineAndDiet(@PathVariable("cuisine") String cuisine, @PathVariable("diet") String diet) {
         return recipesApiService.getRecipesByCuisineAndDiet(cuisine, diet);
     }
