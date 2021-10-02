@@ -1,6 +1,6 @@
 package com.codecool.projectegrandebackend.controller.recipes;
 
-import com.codecool.projectegrandebackend.model.generated.Recipes;
+import com.codecool.projectegrandebackend.model.generated.recipes.Recipes;
 import com.codecool.projectegrandebackend.service.recipes.RecipesApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

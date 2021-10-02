@@ -1,6 +1,6 @@
 package com.codecool.projectegrandebackend.service.recipes;
 
-import com.codecool.projectegrandebackend.model.generated.Recipes;
+import com.codecool.projectegrandebackend.model.generated.recipes.Recipes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
