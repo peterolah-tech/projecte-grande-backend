@@ -2,6 +2,8 @@ package com.codecool.projectegrandebackend.service.ev;
 
 import com.codecool.projectegrandebackend.model.EV;
 import com.codecool.projectegrandebackend.model.generated.ev.EVResponseItem;
+import com.codecool.projectegrandebackend.repository.EVRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -14,6 +16,9 @@ import java.util.Set;
 
 @RestController
 public class EVService {
+
+    @Autowired
+    private EVRepository evRepository;
 
     @Value("${REACT_APP_OPENCHARGERMAP}")
     private String REACT_APP_OPENCHARGERMAP;
@@ -51,20 +56,24 @@ public class EVService {
         for (EVResponseItem evResponse : evs) {
             EV actualEv = createEV(evResponse);
             evList.add(actualEv);
+            System.out.println("HERE");
+            System.out.println(actualEv.toString());
+            evRepository.save(actualEv);
         }
         return evList;
     }
 
-    private EV createEV(EVResponseItem evResponse){
-        EV actualEV = new EV(
-                evResponse.getAddressInfo().getID(),
-                evResponse.getAddressInfo().getAddressLine1(),
-                evResponse.getAddressInfo().getTown(),
-                evResponse.getAddressInfo().getLatitude(),
-                evResponse.getAddressInfo().getLongitude(),
-                evResponse.getAddressInfo().getTitle(),
-                false
-        );
+    private EV createEV(EVResponseItem evResponse) {
+        EV actualEV = EV.builder()
+                .evId(evResponse.getAddressInfo().getID())
+                .address(evResponse.getAddressInfo().getAddressLine1())
+                .town(evResponse.getAddressInfo().getTown())
+                .latitude(evResponse.getAddressInfo().getLatitude())
+                .longitude(evResponse.getAddressInfo().getLongitude())
+                .title(evResponse.getAddressInfo().getTitle())
+                .favorite(false)
+                .build();
+
         return actualEV;
     }
 
