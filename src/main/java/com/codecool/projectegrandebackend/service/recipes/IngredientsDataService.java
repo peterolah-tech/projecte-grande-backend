@@ -1,10 +1,12 @@
 package com.codecool.projectegrandebackend.service.recipes;
 
+import com.codecool.projectegrandebackend.model.generated.recipes.IngredientEmissions;
 import com.codecool.projectegrandebackend.model.generated.recipes.ingredients.IngredientsItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,26 @@ public class IngredientsDataService {
         return ingredientsStringList;
     }
 
+    public double getEmissionForRecipe(String recipeId) {
+        ArrayList<String> ingredients = getIngredientsList(recipeId);
 
+        Double totalEmissions = 0.0;
+
+        // Get emissions data based on tracked ingredients
+        HashMap<String, Double> ingredientEmissions = IngredientEmissions.getIngredientEmissions();
+
+        for (String actualIngredient : ingredients) {
+            if (ingredientEmissions.containsKey(actualIngredient)) {
+                totalEmissions += ingredientEmissions.get(actualIngredient);
+            }
+        }
+
+        // If none was found, assume it's a vegetarian dish
+        if (totalEmissions == 0.0) {
+            totalEmissions = ingredientEmissions.get("vegetables");
+        }
+
+        return totalEmissions;
+    }
 
 }
