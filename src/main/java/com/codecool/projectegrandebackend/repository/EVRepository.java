@@ -12,9 +12,4 @@ public interface EVRepository extends JpaRepository<EV, Long> {
 
     EV findEVByEvId(Integer evId);
 
-
-    @Transactional
-    @Modifying
-    @Query("update EV e set e.favorite = ?1 where e.evId=?2")
-     void updateFavoriteByEvId(boolean favorite, Integer evId);
 }
