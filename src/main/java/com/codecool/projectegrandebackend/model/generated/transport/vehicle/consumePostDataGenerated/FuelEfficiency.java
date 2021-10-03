@@ -1,4 +1,4 @@
-package com.codecool.projectegrandebackend.model.generated.transport.consumePostDataGenerated;
+package com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

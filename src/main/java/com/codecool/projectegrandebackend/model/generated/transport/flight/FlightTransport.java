@@ -1,4 +1,4 @@
-package com.codecool.projectegrandebackend.model.FLGHT_generated;
+package com.codecool.projectegrandebackend.model.generated.transport.flight;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

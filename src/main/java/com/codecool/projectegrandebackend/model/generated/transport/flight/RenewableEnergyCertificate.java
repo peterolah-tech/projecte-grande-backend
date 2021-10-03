@@ -1,13 +1,10 @@
-package com.codecool.projectegrandebackend.model.FLGHT_generated;
+package com.codecool.projectegrandebackend.model.generated.transport.flight;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-public class Offset{
-
-	@JsonProperty("available_carbon_in_kg")
-	private String availableCarbonInKg;
+public class RenewableEnergyCertificate{
 
 	@JsonProperty("country")
 	private String country;
@@ -18,17 +15,14 @@ public class Offset{
 	@JsonProperty("city")
 	private String city;
 
-	@JsonProperty("offset_type")
-	private String offsetType;
+	@JsonProperty("renewable_type")
+	private String renewableType;
 
-	@JsonProperty("offset_type_slug")
-	private String offsetTypeSlug;
+	@JsonProperty("deprecated")
+	private String deprecated;
 
 	@JsonProperty("name")
 	private String name;
-
-	@JsonProperty("pretty_url")
-	private String prettyUrl;
 
 	@JsonProperty("slug")
 	private String slug;

@@ -1,7 +1,9 @@
-package com.codecool.projectegrandebackend.model.generated.transport;
+package com.codecool.projectegrandebackend.model.generated.transport.flight;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class Cost{
 
 	@JsonProperty("total")
@@ -16,19 +18,4 @@ public class Cost{
 	@JsonProperty("transaction")
 	private String transaction;
 
-	public String getTotal(){
-		return total;
-	}
-
-	public String getOffset(){
-		return offset;
-	}
-
-	public String getCurrency(){
-		return currency;
-	}
-
-	public String getTransaction(){
-		return transaction;
-	}
 }

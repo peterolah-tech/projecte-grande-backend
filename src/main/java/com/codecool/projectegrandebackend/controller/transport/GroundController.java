@@ -1,6 +1,6 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
-import com.codecool.projectegrandebackend.model.generated.transport.consumePostDataGenerated.GroundPostInput;
+import com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated.GroundPostInput;
 import com.codecool.projectegrandebackend.service.transport.GroundService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;

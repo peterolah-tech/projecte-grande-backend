@@ -1,18 +1,20 @@
-package com.codecool.projectegrandebackend.service;
+package com.codecool.projectegrandebackend.service.transport;
 
-import com.codecool.projectegrandebackend.model.FLGHT_generated.FlightTransport;
+import com.codecool.projectegrandebackend.model.Airport;
+import com.codecool.projectegrandebackend.model.generated.transport.flight.FlightTransport;
+import com.codecool.projectegrandebackend.repository.AirportRepository;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.List;
 
 
 @Service
@@ -23,16 +25,13 @@ public class FlightService {
     private String API_KEY_CLOVERLY;
     @Value("${Flight_Transport_URL}")
     private String url;
+    @Autowired
+    private AirportRepository airportRepository;
 
-    public String getAirports() throws IOException {
-        File resource = new ClassPathResource("airports.json").getFile();
-        String text = new String(Files.readAllBytes(resource.toPath()));
-        text = text.replaceAll("\r","").replaceAll("\n","")
-                .replaceAll("\\\\","");
-        //text = text.substring(1,text.length());
-        Gson myGson = new Gson();
-        String jsonString = myGson.toJson(text);
-        return jsonString;
+    public String sendAirports() throws IOException {
+        List<Airport> foundAirports = airportRepository.findAll();
+        Gson gson = new Gson();
+        return gson.toJson(foundAirports);
     }
 
     public FlightTransport getFlightData(String jsonString){

@@ -1,16 +1,13 @@
-package com.codecool.projectegrandebackend.controller;
+package com.codecool.projectegrandebackend.controller.transport;
 
-import com.codecool.projectegrandebackend.model.FLGHT_generated.flightPostInput_generated.FlightPostInput;
-import com.codecool.projectegrandebackend.service.FlightService;
+import com.codecool.projectegrandebackend.model.generated.transport.flight.flightPostInput_generated.FlightPostInput;
+import com.codecool.projectegrandebackend.repository.AirportRepository;
+import com.codecool.projectegrandebackend.service.transport.FlightService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @RequestMapping("api/v1")
@@ -20,11 +17,12 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
+
     @PostMapping(
             value="/airports",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String getAirports() throws IOException {
-        return flightService.getAirports();
+    public String sendAirports() throws IOException {
+        return flightService.sendAirports();
     }
 
     @PostMapping(

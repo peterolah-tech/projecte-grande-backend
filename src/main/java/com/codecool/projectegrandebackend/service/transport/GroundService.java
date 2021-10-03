@@ -1,6 +1,6 @@
 package com.codecool.projectegrandebackend.service.transport;
 
-import com.codecool.projectegrandebackend.model.generated.transport.GroundTransport;
+import com.codecool.projectegrandebackend.model.generated.transport.vehicle.GroundTransport;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

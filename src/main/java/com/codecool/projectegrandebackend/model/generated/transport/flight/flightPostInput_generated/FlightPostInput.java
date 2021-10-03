@@ -1,4 +1,4 @@
-package com.codecool.projectegrandebackend.model.FLGHT_generated.flightPostInput_generated;
+package com.codecool.projectegrandebackend.model.generated.transport.flight.flightPostInput_generated;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;

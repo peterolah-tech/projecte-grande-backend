@@ -1,4 +1,4 @@
-package com.codecool.projectegrandebackend.model.generated.transport;
+package com.codecool.projectegrandebackend.model.generated.transport.vehicle;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
