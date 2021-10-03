@@ -31,7 +31,8 @@ public class IngredientsDataService {
         Double totalEmissions = 0.0;
 
         // Get emissions data based on tracked ingredients
-        HashMap<String, Double> ingredientEmissions = IngredientEmissions.getIngredientEmissions();
+        IngredientEmissions emissionsObject = new IngredientEmissions();
+        HashMap<String, Double> ingredientEmissions = emissionsObject.getIngredientEmissions();
 
         for (String actualIngredient : ingredients) {
             if (ingredientEmissions.containsKey(actualIngredient)) {

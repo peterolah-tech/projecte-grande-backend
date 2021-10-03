@@ -10,9 +10,10 @@ public class IngredientEmissions {
     // Could get a separate API for this as well:
     // e.g. https://eaternity.org/foodprint/database
 
-    private static HashMap<String, Double> ingredientEmissions = new HashMap<>();
+    private HashMap<String, Double> ingredientEmissions;
 
-    IngredientEmissions() {
+    public IngredientEmissions() {
+        ingredientEmissions = new HashMap<>();
         ingredientEmissions.put("lamb", 39.2);
         ingredientEmissions.put("beef", 27.0);
         ingredientEmissions.put("cheese", 13.5);
@@ -24,7 +25,7 @@ public class IngredientEmissions {
         ingredientEmissions.put("vegetables", 2.0);
     }
 
-    public static HashMap<String, Double> getIngredientEmissions() {
+    public HashMap<String, Double> getIngredientEmissions() {
         return ingredientEmissions;
     }
 }
