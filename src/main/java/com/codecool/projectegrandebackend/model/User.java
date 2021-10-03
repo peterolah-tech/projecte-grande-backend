@@ -1,11 +1,9 @@
 package com.codecool.projectegrandebackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +25,11 @@ public class User {
 
     private String password;
 
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Singular
+    private Set<Meal> consumedMeals;
 
 
 }
