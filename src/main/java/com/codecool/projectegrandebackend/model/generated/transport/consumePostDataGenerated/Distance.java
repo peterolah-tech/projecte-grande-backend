@@ -1,7 +1,11 @@
 package com.codecool.projectegrandebackend.model.generated.transport.consumePostDataGenerated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class Distance{
 
 	@JsonProperty("units")
@@ -9,12 +13,4 @@ public class Distance{
 
 	@JsonProperty("value")
 	private int value;
-
-	public String getUnits(){
-		return units;
-	}
-
-	public int getValue(){
-		return value;
-	}
 }

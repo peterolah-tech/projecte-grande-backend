@@ -1,7 +1,13 @@
 package com.codecool.projectegrandebackend.model.generated.transport.consumePostDataGenerated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FuelEfficiency{
 
 	@JsonProperty("of")
@@ -12,16 +18,4 @@ public class FuelEfficiency{
 
 	@JsonProperty("value")
 	private int value;
-
-	public String getOf(){
-		return of;
-	}
-
-	public String getUnits(){
-		return units;
-	}
-
-	public int getValue(){
-		return value;
-	}
 }

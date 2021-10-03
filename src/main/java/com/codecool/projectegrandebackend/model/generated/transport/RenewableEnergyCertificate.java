@@ -1,7 +1,11 @@
 package com.codecool.projectegrandebackend.model.generated.transport;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 public class RenewableEnergyCertificate{
 
 	@JsonProperty("country")
@@ -14,7 +18,7 @@ public class RenewableEnergyCertificate{
 	private String city;
 
 	@JsonProperty("renewable_type")
-	private String renewable_type;
+	private String renewableType;
 
 	@JsonProperty("deprecated")
 	private String deprecated;
@@ -26,51 +30,11 @@ public class RenewableEnergyCertificate{
 	private String slug;
 
 	@JsonProperty("total_capacity")
-	private String total_capacity;
+	private String totalCapacity;
 
 //	@JsonProperty("latlng")
 //	private String latlng;
 
 	@JsonProperty("technical_details")
-	private String technical_details;
-
-	public String getCountry(){
-		return country;
-	}
-
-	public String getProvince(){
-		return province;
-	}
-
-	public String getCity(){
-		return city;
-	}
-
-	public String getRenewableType(){
-		return renewable_type;
-	}
-
-	public String getDeprecated(){
-		return deprecated;
-	}
-
-	public String getName(){
-		return name;
-	}
-
-	public String getSlug(){
-		return slug;
-	}
-
-	public String getTotalCapacity(){
-		return total_capacity;
-	}
-
-//	public String getLatlng(){
-//		return latlng;
-//	}
-
-	public String getTechnicalDetails(){
-		return technical_details;
-	}
+	private String technicalDetails;
 }
