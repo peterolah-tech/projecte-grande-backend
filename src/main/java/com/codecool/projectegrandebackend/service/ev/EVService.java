@@ -56,7 +56,6 @@ public class EVService {
         for (EVResponseItem evResponse : evs) {
             EV actualEv = createEV(evResponse);
             evList.add(actualEv);
-            System.out.println("HERE");
             System.out.println(actualEv.toString());
             evRepository.save(actualEv);
         }
@@ -78,11 +77,8 @@ public class EVService {
     }
 
     public void updateFavorite(EV updateEV) {
-        for (EV ev : evList) {
-            if (ev.getEvId().equals(updateEV.getEvId())) {
-                boolean favorite = updateEV.isFavorite();
-                ev.setFavorite(!favorite);
-            }
-        }
+        EV actualEV = evRepository.findEVByEvId(updateEV.getEvId());
+        actualEV.setFavorite(!updateEV.isFavorite());
+        evRepository.updateFavoriteByEvId(actualEV.isFavorite(), updateEV.getEvId());
     }
 }
