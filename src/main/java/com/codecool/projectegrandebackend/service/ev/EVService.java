@@ -29,7 +29,6 @@ public class EVService {
     private Set<EV> evList = new HashSet<>();
     @Value("${REACT_APP_OPENCHARGERMAP}")
     private String REACT_APP_OPENCHARGERMAP;
-//    private String url = "https://api.openchargemap.io/v3/poi/?output=json&latitude=51.509865&longitude=-0.118092&dustance=20";
     private String url = "https://api.openchargemap.io/v3/poi/?output=json&latitude=47.497913&longitude=19.040236&dustance=10";
 
 
@@ -51,26 +50,19 @@ public class EVService {
                 new ParameterizedTypeReference<Set<EVResponseItem>>() {
                 });
         Set<EVResponseItem> evResponse = evResponseEntity.getBody();
-//        if(evList.size() == 0) {
-//            evList = createEVList(evResponse);
-//        }
-//        return evList;
-        if(evRepository.findAll().size()==0) {
            createEVList(evResponse);
-        }
         return evRepository.findAll();
-//        return  evRepository.findAll();
     }
 
-//    private Set<EV> createEVList(Set<EVResponseItem> evs) {
     private void createEVList(Set<EVResponseItem> evs){
         for (EVResponseItem evResponse : evs) {
-            EV actualEv = createEV(evResponse);
-//            evList.add(actualEv);
-//            System.out.println(actualEv.toString());
-            evRepository.save(actualEv);
+            if(!evRepository.existsByEvId(evResponse.getAddressInfo().getID())) {
+                EV actualEv = createEV(evResponse);
+                evRepository.save(actualEv);
+            }else{
+                System.out.println("found evId:  " + evResponse.getAddressInfo().getID());
+            }
         }
-//        return evList;
     }
 
     private EV createEV(EVResponseItem evResponse) {
@@ -90,17 +82,12 @@ public class EVService {
     public void updateFavorite(EV updateEV, User user) {
         EV actualEV = evRepository.findEVByEvId(updateEV.getEvId());
         if(!user.getEvs().contains(actualEV)){
-            System.out.println("not containes");
             actualEV.setFavorite(!updateEV.isFavorite());
             user.getEvs().add(actualEV);
         }else{
-            System.out.println("CONTAINES");
             user.getEvs().remove(actualEV);
             actualEV.setFavorite(!updateEV.isFavorite());
-
         }
-
         userRepository.save(user);
-
     }
 }
