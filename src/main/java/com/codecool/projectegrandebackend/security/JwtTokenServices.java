@@ -1,6 +1,9 @@
 package com.codecool.projectegrandebackend.security;
 
+import com.codecool.projectegrandebackend.model.AppUser;
+import com.codecool.projectegrandebackend.repository.UserRepository;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +21,9 @@ import java.util.List;
 @Component
 // @Slf4j
 public class JwtTokenServices {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey = "secret";
@@ -86,6 +92,10 @@ public class JwtTokenServices {
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
         }
-        return new UsernamePasswordAuthenticationToken(username, "", authorities);
+
+        AppUser loggedUser = userRepository.findByUsername(username).get();
+
+        // return new UsernamePasswordAuthenticationToken(username, "", authorities);
+        return new UsernamePasswordAuthenticationToken(loggedUser, "", authorities);
     }
 }
