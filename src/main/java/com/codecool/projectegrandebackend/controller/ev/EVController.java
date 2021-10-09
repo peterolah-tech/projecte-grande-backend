@@ -1,10 +1,13 @@
 package com.codecool.projectegrandebackend.controller.ev;
 
 import com.codecool.projectegrandebackend.model.EV;
+import com.codecool.projectegrandebackend.model.User;
 import com.codecool.projectegrandebackend.service.ev.EVService;
+import com.codecool.projectegrandebackend.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -13,6 +16,9 @@ public class EVController {
     @Autowired
     private EVService evService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("api/v1/ev")
     public Set<EV> getEV(){
         return evService.getEVData();
@@ -20,7 +26,8 @@ public class EVController {
 
     @PostMapping("api/v1/ev")
     public String changeFavorite(@RequestBody EV ev){
-        evService.updateFavorite(ev);
+        User testUser =  userService.findUser(1L);
+        evService.updateFavorite(ev, testUser);
         return "success";
     }
 
