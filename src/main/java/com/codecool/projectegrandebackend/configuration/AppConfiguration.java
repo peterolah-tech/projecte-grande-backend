@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 @Configuration
 public class AppConfiguration {
 
@@ -26,7 +28,7 @@ public class AppConfiguration {
                     .username("test_bela")
                     .email("bela@takeaction.com")
                     .password(passwordEncoder.encode("5678"))
-                    .role("ROLE_USER") // other is ROLE_ADMIN
+                    .roles(List.of("ROLE_USER")) // other is ROLE_ADMIN
                     .build();
             userRepository.save(betaAppUser);
         };

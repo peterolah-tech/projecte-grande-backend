@@ -31,7 +31,6 @@ public class AppUser {
     // roles of the user (ADMIN, USER,..)
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
-    @Singular
     private List<String> roles = new ArrayList<>();
 
     @Singular
