@@ -20,7 +20,7 @@ public class EVController {
     private UserService userService;
 
     @GetMapping("api/v1/ev")
-    public List<EV> getEV(){
+    public Set<EV> getEV(){
         return evService.getEVData();
     }
 

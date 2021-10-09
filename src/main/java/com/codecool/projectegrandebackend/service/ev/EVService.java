@@ -26,7 +26,7 @@ public class EVService {
     @Autowired
     private UserRepository userRepository;
 
-    private Set<EV> evList = new HashSet<>();
+    private Set<EV> evList;
     @Value("${REACT_APP_OPENCHARGERMAP}")
     private String REACT_APP_OPENCHARGERMAP;
     private String url = "https://api.openchargemap.io/v3/poi/?output=json&latitude=47.497913&longitude=19.040236&dustance=10";
@@ -37,7 +37,7 @@ public class EVService {
         return url;
     }
 
-    public List<EV> getEVData() {
+    public Set<EV> getEVData() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
@@ -51,16 +51,19 @@ public class EVService {
                 });
         Set<EVResponseItem> evResponse = evResponseEntity.getBody();
            createEVList(evResponse);
-        return evRepository.findAll();
+           return evList;
+//        return evRepository.findAll();
     }
 
     private void createEVList(Set<EVResponseItem> evs){
-        for (EVResponseItem evResponse : evs) {
-            if(!evRepository.existsByEvId(evResponse.getAddressInfo().getID())) {
-                EV actualEv = createEV(evResponse);
-                evRepository.save(actualEv);
+        evList = new HashSet<>();
+        for(EVResponseItem evResponse: evs){
+            if(evRepository.existsByEvId(evResponse.getAddressInfo().getID())){
+                EV existEv= evRepository.findEVByEvId(evResponse.getAddressInfo().getID());
+                evList.add(existEv);
             }else{
-                System.out.println("found evId:  " + evResponse.getAddressInfo().getID());
+                EV actualEV = createEV(evResponse);
+                evList.add(actualEV);
             }
         }
     }
@@ -80,14 +83,14 @@ public class EVService {
     }
 
     public void updateFavorite(EV updateEV, User user) {
-        EV actualEV = evRepository.findEVByEvId(updateEV.getEvId());
-        if(!user.getEvs().contains(actualEV)){
-            actualEV.setFavorite(!updateEV.isFavorite());
-            user.getEvs().add(actualEV);
-        }else{
-            user.getEvs().remove(actualEV);
-            actualEV.setFavorite(!updateEV.isFavorite());
+        for(EV ev: evList){
+            if(ev.getEvId().equals(updateEV.getEvId())){
+                boolean favorite = updateEV.isFavorite();
+                ev.setFavorite(!favorite);
+                evRepository.save(ev);
+                user.getEvs().add(ev);
+                userRepository.save(user);
+            }
         }
-        userRepository.save(user);
     }
 }
