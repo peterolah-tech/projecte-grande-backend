@@ -30,7 +30,7 @@ public class EV {
             CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    private Set<User> users = new HashSet<>();
+    private Set<AppUser> appUsers = new HashSet<>();
 
 }
 

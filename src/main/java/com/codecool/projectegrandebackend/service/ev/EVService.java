@@ -1,7 +1,7 @@
 package com.codecool.projectegrandebackend.service.ev;
 
+import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.model.EV;
-import com.codecool.projectegrandebackend.model.User;
 import com.codecool.projectegrandebackend.model.generated.ev.EVResponseItem;
 import com.codecool.projectegrandebackend.repository.EVRepository;
 import com.codecool.projectegrandebackend.repository.UserRepository;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -82,14 +81,14 @@ public class EVService {
         return actualEV;
     }
 
-    public void updateFavorite(EV updateEV, User user) {
+    public void updateFavorite(EV updateEV, AppUser appUser) {
         for(EV ev: evList){
             if(ev.getEvId().equals(updateEV.getEvId())){
                 boolean favorite = updateEV.isFavorite();
                 ev.setFavorite(!favorite);
                 evRepository.save(ev);
-                user.getEvs().add(ev);
-                userRepository.save(user);
+                appUser.getEvs().add(ev);
+                userRepository.save(appUser);
             }
         }
     }

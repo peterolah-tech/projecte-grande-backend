@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name="users") // Cannot create table with "user", it is reserved. Have to change its name.
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue
