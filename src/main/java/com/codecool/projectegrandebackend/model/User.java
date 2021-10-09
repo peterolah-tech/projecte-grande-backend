@@ -3,7 +3,9 @@ package com.codecool.projectegrandebackend.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,6 +27,12 @@ public class User {
     private String email;
 
     private String password;
+
+    // roles of the user (ADMIN, USER,..)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    @Singular
+    private List<String> roles = new ArrayList<>();
 
     @Singular
     @ManyToMany(cascade = {

@@ -7,9 +7,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class AppConfiguration {
+
+    private final PasswordEncoder passwordEncoder;
+
+    public AppConfiguration() {
+        passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
     @Bean
     @Profile("production")
@@ -18,7 +26,8 @@ public class AppConfiguration {
             User betaUser = User.builder()
                     .username("test_bela")
                     .email("bela@takeaction.com")
-                    .password("5678")
+                    .password(passwordEncoder.encode("5678"))
+                    .role("ROLE_USER") // other is ROLE_ADMIN
                     .build();
             userRepository.save(betaUser);
         };
