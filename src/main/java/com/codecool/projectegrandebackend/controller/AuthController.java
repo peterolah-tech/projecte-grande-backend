@@ -3,6 +3,7 @@ package com.codecool.projectegrandebackend.controller;
 import com.codecool.projectegrandebackend.model.UserCredentials;
 import com.codecool.projectegrandebackend.repository.UserRepository;
 import com.codecool.projectegrandebackend.security.JwtTokenServices;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,10 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,19 +20,34 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
 
     private final JwtTokenServices jwtTokenServices;
 
+    private final UserRepository userRepository;
+
     public AuthController(AuthenticationManager authenticationManager, JwtTokenServices jwtTokenServices, UserRepository users) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenServices = jwtTokenServices;
+        this.userRepository = users;
     }
 
-    @PostMapping("/signin")
+    @RequestMapping(value="/registration",
+            method=RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    // public String createRole(@RequestBody MultiValueMap<String, String> formData){
+    public String createRole(@RequestParam HashMap<String, String> formData){
+
+
+
+        System.out.println(formData);
+        return "ok";
+    }
+
+    @PostMapping("api/v1/signin")
     public ResponseEntity signin(@RequestBody UserCredentials data) {
         try {
             String username = data.getUsername();

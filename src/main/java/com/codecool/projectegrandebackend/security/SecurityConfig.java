@@ -27,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/signin").permitAll() // allowed by anyone
+                .antMatchers("/api/v1/signin").permitAll() // allowed by anyone
+                .antMatchers("/api/v1/registration").permitAll() // allowed by anyone
+                // .antMatchers("/api/v1/").permitAll() // allowed by anyone
                 .antMatchers(HttpMethod.GET, "/api/v1/recipes/**").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.GET, "/api/v1/username").authenticated() // allowed only when signed in
                 // .antMatchers(HttpMethod.DELETE, "/vehicles/**").hasRole("ADMIN") // allowed if signed in with ADMIN role
