@@ -1,5 +1,6 @@
 package com.codecool.projectegrandebackend.controller;
 
+import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.model.UserCredentials;
 import com.codecool.projectegrandebackend.repository.UserRepository;
 import com.codecool.projectegrandebackend.security.JwtTokenServices;
@@ -11,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,22 +32,29 @@ public class AuthController {
 
     private final UserRepository userRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public AuthController(AuthenticationManager authenticationManager, JwtTokenServices jwtTokenServices, UserRepository users) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenServices = jwtTokenServices;
         this.userRepository = users;
+        this.passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @RequestMapping(value="/registration",
             method=RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     // public String createRole(@RequestBody MultiValueMap<String, String> formData){
-    public String createRole(@RequestParam HashMap<String, String> formData){
+    public void createRole(@RequestParam HashMap<String, String> formData){
 
+        AppUser newUser = AppUser.builder()
+                .username(formData.get("name"))
+                .email(formData.get("email"))
+                .password(passwordEncoder.encode(formData.get("password")))
+                .roles(List.of("ROLE_USER"))
+                .build();
 
-
-        System.out.println(formData);
-        return "ok";
+        userRepository.save(newUser);
     }
 
     @PostMapping("api/v1/signin")
