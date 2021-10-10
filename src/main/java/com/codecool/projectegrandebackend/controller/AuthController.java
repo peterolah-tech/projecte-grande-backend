@@ -57,12 +57,14 @@ public class AuthController {
         userRepository.save(newUser);
     }
 
-    @PostMapping("api/v1/signin")
-    public ResponseEntity signin(@RequestBody UserCredentials data) {
+    @RequestMapping(value="/signin",
+            method=RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity signin(@RequestBody HashMap<String, String> formData) {
         try {
-            String username = data.getUsername();
+            String username = formData.get("name");
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, formData.get("password")));
             List<String> roles = authentication.getAuthorities()
                     .stream()
                     .map(GrantedAuthority::getAuthority)
