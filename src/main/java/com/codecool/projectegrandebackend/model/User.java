@@ -1,11 +1,10 @@
 package com.codecool.projectegrandebackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +26,17 @@ public class User {
 
     private String password;
 
+    @Singular
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+    })
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinTable(
+            name = "users_evs",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "ev_id"))
 
+    private Set<EV> evs = new HashSet<>();
 
 }

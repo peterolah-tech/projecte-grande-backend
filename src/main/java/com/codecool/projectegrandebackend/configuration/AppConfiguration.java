@@ -1,5 +1,6 @@
 package com.codecool.projectegrandebackend.configuration;
 
+import com.codecool.projectegrandebackend.model.EV;
 import com.codecool.projectegrandebackend.model.User;
 import com.codecool.projectegrandebackend.repository.AirportRepository;
 import com.codecool.projectegrandebackend.repository.UserRepository;
