@@ -43,9 +43,9 @@ public class AuthController {
 
     @RequestMapping(value="/registration",
             method=RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     // public String createRole(@RequestBody MultiValueMap<String, String> formData){
-    public void createRole(@RequestParam HashMap<String, String> formData){
+    public void createRole(@RequestBody Map<String, String> formData){
 
         AppUser newUser = AppUser.builder()
                 .username(formData.get("name"))
