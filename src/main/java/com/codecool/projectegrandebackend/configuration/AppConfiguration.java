@@ -27,14 +27,14 @@ public class AppConfiguration {
 
             Meal meal = Meal.builder().apiId(123456).build();
 
-            Set<Meal> mealSet = new HashSet<>();
-            mealSet.add(meal);
+            // Set<Meal> mealSet = new HashSet<>();
+            // mealSet.add(meal);
 
             User betaUser2 = User.builder()
                     .username("test_janos")
                     .email("janos@takeaction.com")
                     .password("9876")
-                    .consumedMeals(mealSet)
+                    .consumedMeal(meal)
                     .build();
             userRepository.save(betaUser2);
 

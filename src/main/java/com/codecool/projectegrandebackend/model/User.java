@@ -30,7 +30,7 @@ public class User {
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     @ToString.Exclude
-    // @Singular
+    @Singular
     private Set<Meal> consumedMeals;
 
 
