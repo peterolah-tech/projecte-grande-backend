@@ -1,8 +1,10 @@
 package com.codecool.projectegrandebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,17 +23,11 @@ public class Meal {
     @Transient
     private double emissionValue;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinTable(
-            name = "user_meal",
-            joinColumns = @JoinColumn(name = "meal_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    // @Singular
+    @Singular
+    @ManyToMany(mappedBy = "consumedMeals", cascade = {
+            CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Set<User> consumingUsers;
-
-    //tostring exclude, plus hashcode
-    // and need jsonignore annotation too
-
+    @JsonIgnore
+    private Set<User> users = new HashSet<>();
+    // TODO: ask Ani about initiation here
 }

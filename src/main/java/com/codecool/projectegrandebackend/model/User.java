@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -25,13 +26,18 @@ public class User {
     private String email;
 
     private String password;
-
-    @ManyToMany(mappedBy = "consumingUsers", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @EqualsAndHashCode.Exclude
-    @JsonIgnore
-    @ToString.Exclude
+    
     @Singular
-    private Set<Meal> consumedMeals;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+    })
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinTable(
+            name = "users_meals",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "meal_id"))
 
+    private Set<Meal> consumedMeals = new HashSet<>();
 
 }
