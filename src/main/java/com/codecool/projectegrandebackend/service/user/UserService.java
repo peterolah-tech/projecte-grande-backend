@@ -18,8 +18,16 @@ public class UserService {
         if(user.isPresent()){
             return user.get();
         }else{
-            throw new IllegalStateException("Sorry no user");
+            throw new IllegalStateException("Sorry user not found");
         }
     }
 
+    public AppUser findByUserName(String username){
+        Optional<AppUser> user = userRepository.findByUsername(username);
+        if(user.isPresent()){
+            return user.get();
+        }else{
+            throw new IllegalStateException("Sorry user not found");
+        }
+    }
 }
