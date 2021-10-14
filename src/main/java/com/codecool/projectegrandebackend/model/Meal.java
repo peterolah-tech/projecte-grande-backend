@@ -21,13 +21,15 @@ public class Meal {
     @Transient
     private double emissionValue;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinTable(
             name = "user_meal",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "meal_id"))
-    @Singular
-    private Set<User> users;
+            joinColumns = @JoinColumn(name = "meal_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    // @Singular
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<User> consumingUsers;
 
     //tostring exclude, plus hashcode
     // and need jsonignore annotation too

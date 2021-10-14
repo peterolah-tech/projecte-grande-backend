@@ -1,5 +1,6 @@
 package com.codecool.projectegrandebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,10 +26,11 @@ public class User {
 
     private String password;
 
-    @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToMany(mappedBy = "consumingUsers", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     @ToString.Exclude
-    @Singular
+    // @Singular
     private Set<Meal> consumedMeals;
 
 
