@@ -1,41 +1,54 @@
 package com.codecool.projectegrandebackend.configuration;
 
+
+import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.model.Meal;
-import com.codecool.projectegrandebackend.model.User;
 import com.codecool.projectegrandebackend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Configuration
 public class AppConfiguration {
 
+    private final PasswordEncoder passwordEncoder;
+
+    public AppConfiguration() {
+        passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
     @Bean
     @Profile("production")
-    CommandLineRunner commandLineRunner(UserRepository userRepository) {
+    CommandLineRunner commandLineRunner(UserRepository userRepository, AirportsFactory airportsFactory) {
         return args -> {
-            User betaUser = User.builder()
+            airportsFactory.saveCreatedAirports();
+
+            AppUser betaAppUser = AppUser.builder()
                     .username("test_bela")
                     .email("bela@takeaction.com")
-                    .password("5678")
+                    .password(passwordEncoder.encode("5678"))
+                    .roles(List.of("ROLE_USER")) // other is ROLE_ADMIN
                     .build();
-            userRepository.save(betaUser);
+
+            userRepository.save(betaAppUser);
 
             Meal meal = Meal.builder().apiId(123456).build();
 
             // Set<Meal> mealSet = new HashSet<>();
             // mealSet.add(meal);
 
-            User betaUser2 = User.builder()
+            AppUser betaUser2 = AppUser.builder()
                     .username("test_janos")
                     .email("janos@takeaction.com")
                     .password("9876")
                     .consumedMeal(meal)
                     .build();
+
             userRepository.save(betaUser2);
 
         };

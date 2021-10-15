@@ -1,13 +1,11 @@
 package com.codecool.projectegrandebackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -26,6 +24,12 @@ public class EV {
     private double longitude;
     private String title;
     private boolean favorite;
+
+    @Singular
+    @ManyToMany(mappedBy = "evs", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private Set<AppUser> appUsers = new HashSet<>();
 
 }
 
