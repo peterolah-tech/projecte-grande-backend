@@ -42,7 +42,7 @@ public class FlightController {
                 .airportFrom(inputData.getAirports().get(0))
                 .airportThrough(inputData.getAirports().get(1))
                 .airportTo(inputData.getAirports().get(2))
-                .flightCarbonInKg(Float.parseFloat(remoteCarbonInKg))
+                .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .build();
         flightTransportationRepository.save(flightTransportation);
         return remoteCarbonInKg;

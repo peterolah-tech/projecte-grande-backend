@@ -48,7 +48,7 @@ public class GroundController {
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
         String fuelType = inputData.getFuelEfficiency().getOf();
         GroundTransportation groundTransportation = GroundTransportation.builder()
-                .vehicleCarbonInKg(Float.parseFloat(remoteCarbonInKg))
+                .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .fuelEfficiency(inputData.getFuelEfficiency().getValue())
                 .fuelType(fuelType == "diesel" ? FuelType.DIESEL : FuelType.GASOLINE)
                 .distance(inputData.getDistance().getValue())

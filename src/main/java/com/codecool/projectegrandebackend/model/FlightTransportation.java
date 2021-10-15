@@ -1,33 +1,43 @@
 package com.codecool.projectegrandebackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 @Entity
-public class FlightTransportation {
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+public class FlightTransportation extends Transportation{
 
     @Id
     @GeneratedValue
-    private long id;
-    
-    //private long userID;
-
-    private LocalDate dateOfTravel;
+    private Long id;
 
     private String airportFrom;
     private String airportThrough;
     private String airportTo;
 
-    private float flightCarbonInKg;
+//    @Builder
+//    public FlightTransportation(LocalDate dateOfTravel, String airportFrom, String airportThrough, String airportTo, float equivalentCarbonInKg) {
+//        super(dateOfTravel, equivalentCarbonInKg);
+//        this.airportFrom = airportFrom;
+//        this.airportThrough = airportThrough;
+//        this.airportTo = airportTo;
+//    }
+//
+//    @Builder
+//    public FlightTransportation(Long id, LocalDate dateOfTravel, String airportFrom, String airportThrough, String airportTo, float equivalentCarbonInKg) {
+//        super(dateOfTravel, equivalentCarbonInKg);
+//        this.id = id;
+//        this.airportFrom = airportFrom;
+//        this.airportThrough = airportThrough;
+//        this.airportTo = airportTo;
+//    }
+//
 
 }

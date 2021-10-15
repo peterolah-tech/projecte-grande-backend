@@ -1,28 +1,22 @@
 package com.codecool.projectegrandebackend.model;
 
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.FuelType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-public class GroundTransportation {
+@SuperBuilder
+public class GroundTransportation extends Transportation{
 
     @Id
     @GeneratedValue
-    private long id;
-
-    //private long userID;
-
-    private LocalDate dateOfTravel;
+    private Long id;
 
     private double distance;
 
@@ -31,7 +25,21 @@ public class GroundTransportation {
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
 
-    private float vehicleCarbonInKg;
-
+//    @Builder
+//    public GroundTransportation(LocalDate dateOfTravel, float equivalentCarbonInKg, long id, double distance, double fuelEfficiency, FuelType fuelType) {
+//        super(dateOfTravel, equivalentCarbonInKg);
+//        this.id = id;
+//        this.distance = distance;
+//        this.fuelEfficiency = fuelEfficiency;
+//        this.fuelType = fuelType;
+//    }
+//
+//    @Builder
+//    public GroundTransportation(Long id, LocalDate dateOfTravel, float equivalentCarbonInKg, double distance, double fuelEfficiency, FuelType fuelType) {
+//        super(dateOfTravel, equivalentCarbonInKg);
+//        this.distance = distance;
+//        this.fuelEfficiency = fuelEfficiency;
+//        this.fuelType = fuelType;
+//    }
 }
 

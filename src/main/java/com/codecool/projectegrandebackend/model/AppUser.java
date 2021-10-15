@@ -41,7 +41,15 @@ public class AppUser {
             name = "users_evs",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "ev_id"))
-
     private Set<EV> evs = new HashSet<>();
 
+    @Singular
+    @OneToMany(cascade = {CascadeType.PERSIST})
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinTable(
+            name = "users_travels",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "travel_id"))
+    private Set<FlightTransportation> journeys = new HashSet<>();
 }
