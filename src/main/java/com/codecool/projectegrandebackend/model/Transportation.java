@@ -19,6 +19,8 @@ public class Transportation {
     @Id
     @GeneratedValue
     private long id;
+    
+    //private long userID;
 
     private LocalDate dateOfTravel;
 
