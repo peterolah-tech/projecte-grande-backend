@@ -1,9 +1,10 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
-import com.codecool.projectegrandebackend.model.Transportation;
+import com.codecool.projectegrandebackend.model.FlightTransportation;
+import com.codecool.projectegrandebackend.model.GroundTransportation;
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.FuelType;
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated.GroundPostInput;
-import com.codecool.projectegrandebackend.repository.TransportationRepository;
+import com.codecool.projectegrandebackend.repository.GroundTransportationRepository;
 import com.codecool.projectegrandebackend.service.transport.GroundService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ import java.time.LocalDate;
 public class GroundController {
 
     private GroundService groundService;
-    private TransportationRepository transportationRepository;
+    private GroundTransportationRepository groundTransportationRepository;
 
     @Autowired
-    public GroundController(GroundService groundService, TransportationRepository transportationRepository) {
+    public GroundController(GroundService groundService, GroundTransportationRepository groundTransportationRepository) {
         this.groundService = groundService;
-        this.transportationRepository = transportationRepository;
+        this.groundTransportationRepository = groundTransportationRepository;
     }
 
 //    @GetMapping("/ground-transport")
@@ -46,14 +47,14 @@ public class GroundController {
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
         String fuelType = inputData.getFuelEfficiency().getOf();
-        Transportation transportation = Transportation.builder()
+        GroundTransportation groundTransportation = GroundTransportation.builder()
                 .vehicleCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .fuelEfficiency(inputData.getFuelEfficiency().getValue())
                 .fuelType(fuelType == "diesel" ? FuelType.DIESEL : FuelType.GASOLINE)
                 .distance(inputData.getDistance().getValue())
                 .dateOfTravel(LocalDate.now())
                 .build();
-        transportationRepository.save(transportation);
+        groundTransportationRepository.save(groundTransportation);
         return remoteCarbonInKg;
     }
     

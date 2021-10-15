@@ -14,12 +14,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Transportation {
+public class GroundTransportation {
 
     @Id
     @GeneratedValue
     private long id;
-    
+
     //private long userID;
 
     private LocalDate dateOfTravel;
@@ -33,11 +33,5 @@ public class Transportation {
 
     private float vehicleCarbonInKg;
 
-
-    private float flightCarbonInKg;
-
-    private String airportFrom;
-    private String airportThrough;
-    private String airportTo;
-
 }
+
