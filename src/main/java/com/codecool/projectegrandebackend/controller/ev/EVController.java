@@ -6,6 +6,7 @@ import com.codecool.projectegrandebackend.service.ev.EVService;
 import com.codecool.projectegrandebackend.service.user.UserService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -26,14 +27,9 @@ public class EVController {
 
     @RequestMapping(value = "api/v1/ev", method = RequestMethod.POST)
     @ResponseBody
-    public String changeFavorite(@RequestBody ObjectNode json){
-        String username = json.get("username").asText();
-        EV ev = EV.builder()
-                .evId(json.get("evId").asInt())
-                .favorite(json.get("favorite").asBoolean())
-                .build();
-        AppUser logInUser = userService.findByUserName(username);
-        evService.updateFavorite(ev, logInUser);
+    public String changeFavorite(@RequestBody EV ev, Authentication authentication){
+        AppUser user = (AppUser) authentication.getPrincipal();
+        evService.updateFavorite(ev, user);
         return "success";
     }
 

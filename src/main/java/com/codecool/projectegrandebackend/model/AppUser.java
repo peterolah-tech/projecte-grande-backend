@@ -34,9 +34,7 @@ public class AppUser {
     private List<String> roles = new ArrayList<>();
 
     @Singular
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-    })
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinTable(
