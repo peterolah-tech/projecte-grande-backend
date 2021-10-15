@@ -1,14 +1,23 @@
 package com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated;
 
+import com.codecool.projectegrandebackend.model.generated.transport.FuelType;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-public class GroundPostInput{
+
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class GroundPostInput {
 
 	@JsonProperty("distance")
 	private Distance distance;
 
 	@JsonProperty("fuel_efficiency")
 	private FuelEfficiency fuel_efficiency;
+
 
 	public Distance getDistance(){
 		return distance;
@@ -17,12 +26,6 @@ public class GroundPostInput{
 	public FuelEfficiency getFuelEfficiency(){
 		return fuel_efficiency;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "GroundPostInput{" +
-				"distance=" + distance +
-				", fuelEfficiency=" + fuel_efficiency +
-				'}';
-	}
 }
