@@ -25,4 +25,5 @@ public abstract class Transportation {
 
     protected float equivalentCarbonInKg;
 
+
 }

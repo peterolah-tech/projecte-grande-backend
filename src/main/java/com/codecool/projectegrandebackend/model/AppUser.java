@@ -51,5 +51,5 @@ public class AppUser {
             name = "users_travels",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "travel_id"))
-    private Set<FlightTransportation> journeys = new HashSet<>();
+    private Set<Transportation> journeys = new HashSet<>();
 }
