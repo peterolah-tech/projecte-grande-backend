@@ -1,5 +1,8 @@
 package com.codecool.projectegrandebackend.configuration;
 
+
+import com.codecool.projectegrandebackend.model.EV;
+import com.codecool.projectegrandebackend.repository.AirportRepository;
 import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -22,8 +25,10 @@ public class AppConfiguration {
 
     @Bean
     @Profile("production")
-    CommandLineRunner commandLineRunner(UserRepository userRepository) {
+    CommandLineRunner commandLineRunner(UserRepository userRepository, AirportsFactory airportsFactory) {
         return args -> {
+            airportsFactory.saveCreatedAirports();
+            User betaUser = User.builder()
             AppUser betaAppUser = AppUser.builder()
                     .username("test_bela")
                     .email("bela@takeaction.com")
