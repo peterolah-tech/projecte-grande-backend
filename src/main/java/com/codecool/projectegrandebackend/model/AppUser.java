@@ -56,5 +56,6 @@ public class AppUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "meal_id"))
 
-    private Set<Meal> consumedMeals = new HashSet<>();
+    private Set<Meal> consumedMeals;
+    // private Set<Meal> consumedMeals = new HashSet<>();
 }

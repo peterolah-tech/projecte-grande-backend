@@ -1,8 +1,12 @@
 package com.codecool.projectegrandebackend.controller.recipes;
 
 import com.codecool.projectegrandebackend.model.AppUser;
+import com.codecool.projectegrandebackend.model.Meal;
 import com.codecool.projectegrandebackend.model.generated.recipes.Recipes;
+import com.codecool.projectegrandebackend.repository.MealRepository;
+import com.codecool.projectegrandebackend.repository.UserRepository;
 import com.codecool.projectegrandebackend.service.recipes.RecipesApiService;
+import com.codecool.projectegrandebackend.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -17,12 +21,21 @@ public class RecipesController {
     @Autowired
     private RecipesApiService recipesApiService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private MealRepository mealRepository;
+
     @GetMapping("api/v1/recipes/{cuisine}/{diet}")
     public Recipes getRecipesByCuisineAndDiet(@PathVariable("cuisine") String cuisine, @PathVariable("diet") String diet) {
         return recipesApiService.getRecipesByCuisineAndDiet(cuisine, diet);
     }
 
-    @RequestMapping(value="/food/api/v1/add-meal",
+    @RequestMapping(value="api/v1/add-meal",
             method= RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createRole(@RequestBody Map<String, String> formData, Authentication authentication){
@@ -33,6 +46,13 @@ public class RecipesController {
         Object principal = authentication.getPrincipal();
         AppUser user = (AppUser) authentication.getPrincipal();
 
+        Meal meal = Meal.builder()
+                .apiId(Integer.parseInt(formData.get("meal_id")))
+                // .user(user)
+                .build();
+
+        userService.addMealToUser(meal, user);
+        // mealRepository.save(meal);
 
 //        AppUser newUser = AppUser.builder()
 //                .username(formData.get("name"))
