@@ -28,6 +28,6 @@ public class Meal {
             CascadeType.PERSIST})
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    private Set<User> users = new HashSet<>();
+    private Set<AppUser> users = new HashSet<>();
     // TODO: ask Ani about initiation here
 }
