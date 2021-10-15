@@ -36,12 +36,12 @@ public class UserService {
 
     public void addMealToUser(Meal mealToAdd, AppUser user) {
 
-        Set<Meal> mealSet = new HashSet<>();
-        mealSet.add(mealToAdd);
-        user.setConsumedMeals(mealSet);
-        // Set<Meal> consumedMeals = user.getConsumedMeals();
+        // Set<Meal> mealSet = new HashSet<>();
+        // mealSet.add(mealToAdd);
+        // user.setConsumedMeals(mealSet);
+        Set<Meal> consumedMeals = user.getConsumedMeals();
         // TODO: Check why this returns an exception
-        // consumedMeals.add(mealToAdd);
+        consumedMeals.add(mealToAdd);
         userRepository.save(user);
     }
 }

@@ -46,8 +46,11 @@ public class RecipesController {
         Object principal = authentication.getPrincipal();
         AppUser user = (AppUser) authentication.getPrincipal();
 
+        String mealId = formData.get("meal_id");
+        int intMealId = Integer.parseInt(mealId);
+
         Meal meal = Meal.builder()
-                .apiId(Integer.parseInt(formData.get("meal_id")))
+                .apiId(intMealId)
                 // .user(user)
                 .build();
 

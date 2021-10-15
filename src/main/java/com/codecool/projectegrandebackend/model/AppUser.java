@@ -47,8 +47,8 @@ public class AppUser {
     // For the food feature
     @Singular
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-    })
+            CascadeType.ALL
+    }, fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinTable(

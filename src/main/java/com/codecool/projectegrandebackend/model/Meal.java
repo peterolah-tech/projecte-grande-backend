@@ -25,7 +25,7 @@ public class Meal {
 
     @Singular
     @ManyToMany(mappedBy = "consumedMeals", cascade = {
-            CascadeType.PERSIST})
+            CascadeType.ALL}, fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     private Set<AppUser> users = new HashSet<>();
