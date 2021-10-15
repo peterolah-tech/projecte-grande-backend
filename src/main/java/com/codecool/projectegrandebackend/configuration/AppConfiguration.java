@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -28,7 +29,7 @@ public class AppConfiguration {
     CommandLineRunner commandLineRunner(UserRepository userRepository, AirportsFactory airportsFactory) {
         return args -> {
             airportsFactory.saveCreatedAirports();
-            User betaUser = User.builder()
+//            User betaUser = User.builder()
             AppUser betaAppUser = AppUser.builder()
                     .username("test_bela")
                     .email("bela@takeaction.com")
