@@ -1,7 +1,7 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
 import com.codecool.projectegrandebackend.model.Transportation;
-import com.codecool.projectegrandebackend.model.generated.transport.FuelType;
+import com.codecool.projectegrandebackend.model.generated.transport.vehicle.FuelType;
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated.GroundPostInput;
 import com.codecool.projectegrandebackend.repository.TransportationRepository;
 import com.codecool.projectegrandebackend.service.transport.GroundService;

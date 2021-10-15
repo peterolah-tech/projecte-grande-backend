@@ -1,6 +1,6 @@
 package com.codecool.projectegrandebackend.model;
 
-import com.codecool.projectegrandebackend.model.generated.transport.FuelType;
+import com.codecool.projectegrandebackend.model.generated.transport.vehicle.FuelType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
