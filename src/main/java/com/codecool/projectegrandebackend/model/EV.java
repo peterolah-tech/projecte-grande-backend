@@ -26,11 +26,10 @@ public class EV {
     private boolean favorite;
 
     @Singular
-    @ManyToMany(mappedBy = "evs", cascade = {
-            CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "evs", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    private Set<User> users = new HashSet<>();
+    private Set<AppUser> appUsers = new HashSet<>();
 
 }
 

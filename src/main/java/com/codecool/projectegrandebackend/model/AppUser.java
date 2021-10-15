@@ -3,7 +3,9 @@ package com.codecool.projectegrandebackend.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -12,7 +14,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name="users") // Cannot create table with "user", it is reserved. Have to change its name.
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue
@@ -26,10 +28,13 @@ public class User {
 
     private String password;
 
+    // roles of the user (ADMIN, USER,..)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
+
     @Singular
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-    })
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinTable(
