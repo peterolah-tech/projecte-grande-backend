@@ -1,6 +1,7 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
 import com.codecool.projectegrandebackend.model.Transportation;
+import com.codecool.projectegrandebackend.model.generated.transport.FuelType;
 import com.codecool.projectegrandebackend.model.generated.transport.GroundTransport;
 import com.codecool.projectegrandebackend.model.generated.transport.consumePostDataGenerated.GroundPostInput;
 import com.codecool.projectegrandebackend.repository.TransportationRepository;
@@ -43,10 +44,13 @@ public class GroundController {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
+        String fuelType = inputData.getFuelEfficiency().getOf();
         Transportation transportation = Transportation.builder()
                 .vehicleCarbonInKg(Float.parseFloat(remoteCarbonInKg))
-                .flightCarbonInKg(0)
-                .dateOfTravel(LocalDate.of(2021,10,11))
+                .fuelEfficiency(inputData.getFuelEfficiency().getValue())
+                .fuelType(fuelType == "diesel" ? FuelType.DIESEL : FuelType.GASOLINE)
+                .distance(inputData.getDistance().getValue())
+                .dateOfTravel(LocalDate.now())
                 .build();
         transportationRepository.save(transportation);
         return remoteCarbonInKg;

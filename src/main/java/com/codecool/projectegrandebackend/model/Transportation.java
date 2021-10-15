@@ -1,12 +1,12 @@
 package com.codecool.projectegrandebackend.model;
 
+import com.codecool.projectegrandebackend.model.generated.transport.FuelType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -22,8 +22,20 @@ public class Transportation {
 
     private LocalDate dateOfTravel;
 
+    private double distance;
+
+    private double fuelEfficiency;
+
+    @Enumerated(EnumType.STRING)
+    private FuelType fuelType;
+
     private float vehicleCarbonInKg;
 
+
     private float flightCarbonInKg;
+
+    private String airportFrom;
+    private String airportThrough;
+    private String airportTo;
 
 }
