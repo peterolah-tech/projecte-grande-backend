@@ -1,20 +1,15 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
-import com.codecool.projectegrandebackend.model.Transportation;
-import com.codecool.projectegrandebackend.model.generated.transport.flight.FlightTransport;
+import com.codecool.projectegrandebackend.model.FlightTransportation;
 import com.codecool.projectegrandebackend.model.generated.transport.flight.flightPostInput_generated.FlightPostInput;
-import com.codecool.projectegrandebackend.repository.AirportRepository;
-import com.codecool.projectegrandebackend.repository.TransportationRepository;
+import com.codecool.projectegrandebackend.repository.FlightTransportationRepository;
 import com.codecool.projectegrandebackend.service.transport.FlightService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 @RequestMapping("api/v1")
 @RestController
@@ -24,7 +19,7 @@ public class FlightController {
     private FlightService flightService;
 
     @Autowired
-    private TransportationRepository transportationRepository;
+    private FlightTransportationRepository flightTransportationRepository;
 
     @PostMapping(
             value="/airports",
@@ -42,14 +37,14 @@ public class FlightController {
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
 
-        Transportation transportation = Transportation.builder()
+        FlightTransportation flightTransportation = FlightTransportation.builder()
                 .dateOfTravel(LocalDate.now())
                 .airportFrom(inputData.getAirports().get(0))
                 .airportThrough(inputData.getAirports().get(1))
                 .airportTo(inputData.getAirports().get(2))
-                .flightCarbonInKg(Float.parseFloat(remoteCarbonInKg))
+                .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .build();
-        transportationRepository.save(transportation);
+        flightTransportationRepository.save(flightTransportation);
         return remoteCarbonInKg;
     }
 }

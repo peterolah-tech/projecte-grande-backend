@@ -1,8 +1,6 @@
 package com.codecool.projectegrandebackend.configuration;
 
 
-import com.codecool.projectegrandebackend.model.EV;
-import com.codecool.projectegrandebackend.repository.AirportRepository;
 import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +10,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.List;
 
 @Configuration
@@ -29,7 +26,6 @@ public class AppConfiguration {
     CommandLineRunner commandLineRunner(UserRepository userRepository, AirportsFactory airportsFactory) {
         return args -> {
             airportsFactory.saveCreatedAirports();
-//            User betaUser = User.builder()
             AppUser betaAppUser = AppUser.builder()
                     .username("test_bela")
                     .email("bela@takeaction.com")
