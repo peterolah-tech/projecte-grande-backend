@@ -1,12 +1,15 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
+import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.model.FlightTransportation;
 import com.codecool.projectegrandebackend.model.generated.transport.flight.flightPostInput_generated.FlightPostInput;
 import com.codecool.projectegrandebackend.repository.FlightTransportationRepository;
+import com.codecool.projectegrandebackend.repository.UserRepository;
 import com.codecool.projectegrandebackend.service.transport.FlightService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -21,6 +24,9 @@ public class FlightController {
     @Autowired
     private FlightTransportationRepository flightTransportationRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping(
             value="/airports",
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -32,7 +38,7 @@ public class FlightController {
             value = "/flight-transport",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String getFlightTransport(@RequestBody FlightPostInput inputData) {
+    public String getFlightTransport(@RequestBody FlightPostInput inputData, Authentication authentication) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
@@ -45,6 +51,10 @@ public class FlightController {
                 .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .build();
         flightTransportationRepository.save(flightTransportation);
+
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+        appUser.addJourney(flightTransportation);
+        userRepository.save(appUser);
         return remoteCarbonInKg;
     }
 }

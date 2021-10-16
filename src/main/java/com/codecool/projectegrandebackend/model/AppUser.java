@@ -1,7 +1,6 @@
 package com.codecool.projectegrandebackend.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,4 +51,8 @@ public class AppUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "travel_id"))
     private Set<Transportation> journeys = new HashSet<>();
+
+    public void addJourney(Transportation journey) {
+        journeys.add(journey);
+    }
 }
