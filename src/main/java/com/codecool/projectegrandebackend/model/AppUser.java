@@ -16,7 +16,7 @@ import java.util.Set;
 public class AppUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -42,8 +42,8 @@ public class AppUser {
             inverseJoinColumns = @JoinColumn(name = "ev_id"))
     private Set<EV> evs = new HashSet<>();
 
-    @Singular
-    @OneToMany(cascade = {CascadeType.PERSIST})
+
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinTable(

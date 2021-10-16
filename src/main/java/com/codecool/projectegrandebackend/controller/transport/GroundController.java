@@ -51,12 +51,12 @@ public class GroundController {
                 .distance(inputData.getDistance().getValue())
                 .dateOfTravel(LocalDate.now())
                 .build();
-        groundTransportationRepository.save(groundTransportation);
 
         AppUser appUser = (AppUser) authentication.getPrincipal();
-        System.out.println(appUser);
         appUser.addJourney(groundTransportation);
         userRepository.save(appUser);
+
+//        groundTransportationRepository.save(groundTransportation);
         return remoteCarbonInKg;
     }
     

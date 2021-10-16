@@ -50,11 +50,13 @@ public class FlightController {
                 .airportTo(inputData.getAirports().get(2))
                 .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .build();
-        flightTransportationRepository.save(flightTransportation);
+
 
         AppUser appUser = (AppUser) authentication.getPrincipal();
         appUser.addJourney(flightTransportation);
         userRepository.save(appUser);
+
+//        flightTransportationRepository.save(flightTransportation);
         return remoteCarbonInKg;
     }
 }
