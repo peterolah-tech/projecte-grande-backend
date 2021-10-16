@@ -23,6 +23,7 @@ public class EV {
     private double latitude;
     private double longitude;
     private String title;
+    private int likedNumber;
     private boolean favorite;
 
     @Singular

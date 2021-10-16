@@ -12,6 +12,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,7 +59,10 @@ public class EVService {
         evList = new HashSet<>();
         for(EVResponseItem evResponse: evs){
             if(evRepository.existsByEvId(evResponse.getAddressInfo().getID())){
+
                 EV existEv= evRepository.findEVByEvId(evResponse.getAddressInfo().getID());
+                int likedNumber= evRepository.findEVCountByDistinctEVId(existEv.getId());
+                existEv.setLikedNumber(likedNumber);
                 evList.add(existEv);
             }else{
                 EV actualEV = createEV(evResponse);
@@ -75,6 +79,7 @@ public class EVService {
                 .latitude(evResponse.getAddressInfo().getLatitude())
                 .longitude(evResponse.getAddressInfo().getLongitude())
                 .title(evResponse.getAddressInfo().getTitle())
+                .likedNumber(0)
                 .favorite(false)
                 .build();
 
