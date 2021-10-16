@@ -52,6 +52,9 @@ public class GroundController {
                 .dateOfTravel(LocalDate.now())
                 .build();
 
+        // If record already exists for that day, override it:
+        groundTransportationRepository.findOne()
+
         AppUser appUser = (AppUser) authentication.getPrincipal();
         appUser.addJourney(groundTransportation);
         userRepository.save(appUser);
