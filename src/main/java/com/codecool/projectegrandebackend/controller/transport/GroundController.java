@@ -1,10 +1,8 @@
 package com.codecool.projectegrandebackend.controller.transport;
 
 import com.codecool.projectegrandebackend.model.AppUser;
-import com.codecool.projectegrandebackend.model.FlightTransportation;
 import com.codecool.projectegrandebackend.model.GroundTransportation;
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.FuelType;
-import com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated.GroundPersistInput;
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.consumePostDataGenerated.GroundPostInput;
 import com.codecool.projectegrandebackend.repository.GroundTransportationRepository;
 import com.codecool.projectegrandebackend.repository.UserRepository;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDate;
 
 @RequestMapping("api/v1")
 @RestController
@@ -53,7 +49,7 @@ public class GroundController {
             value = "/ground-transport/persist",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public void saveCarbonGroundtoDB(@RequestBody GroundPersistInput inputData, Authentication authentication) {
+    public void saveCarbonGroundtoDB(@RequestBody GroundPostInput inputData, Authentication authentication) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
