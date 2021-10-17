@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Configuration
@@ -37,7 +39,11 @@ public class AppConfiguration {
 
             userRepository.save(betaAppUser);
 
-            Meal meal = Meal.builder().apiId(123456).build();
+            Date mealDate = new SimpleDateFormat("dd/MM/yyyy").parse("15/10/2021");
+            Meal meal = Meal.builder()
+                    .apiId(123456)
+                    .consumptionDate(mealDate)
+                    .build();
 
             // Set<Meal> mealSet = new HashSet<>();
             // mealSet.add(meal);
