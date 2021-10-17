@@ -12,6 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +41,7 @@ public class RecipesController {
     @RequestMapping(value="api/v1/add-meal",
             method= RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createRole(@RequestBody Map<String, String> formData, Authentication authentication){
+    public void createRole(@RequestBody Map<String, String> formData, Authentication authentication) throws ParseException {
         String username = authentication.getName();
         String roles = authentication.getAuthorities().toString();
 
@@ -48,9 +51,11 @@ public class RecipesController {
 
         String mealId = formData.get("meal_id");
         int intMealId = Integer.parseInt(mealId);
+        Date mealDate = new SimpleDateFormat("dd/MM/yyyy").parse(formData.get("consumption_date"));
 
         Meal meal = Meal.builder()
                 .apiId(intMealId)
+                .consumptionDate(mealDate)
                 // .user(user)
                 .build();
 

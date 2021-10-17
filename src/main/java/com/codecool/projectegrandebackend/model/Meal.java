@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,8 @@ public class Meal {
     @Id
     @GeneratedValue
     private Long id;
+
+    private Date consumptionDate;
 
     private int apiId;
 
