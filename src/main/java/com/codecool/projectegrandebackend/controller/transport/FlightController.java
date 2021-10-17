@@ -19,14 +19,16 @@ import java.time.LocalDate;
 @RestController
 public class FlightController {
 
-    @Autowired
     private FlightService flightService;
-
-    @Autowired
     private FlightTransportationRepository flightTransportationRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public FlightController(FlightService flightService, FlightTransportationRepository flightTransportationRepository, UserRepository userRepository) {
+        this.flightService = flightService;
+        this.flightTransportationRepository = flightTransportationRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping(
             value="/airports",
