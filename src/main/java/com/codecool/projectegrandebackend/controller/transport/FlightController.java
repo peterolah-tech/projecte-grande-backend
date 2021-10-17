@@ -2,6 +2,7 @@ package com.codecool.projectegrandebackend.controller.transport;
 
 import com.codecool.projectegrandebackend.model.AppUser;
 import com.codecool.projectegrandebackend.model.FlightTransportation;
+import com.codecool.projectegrandebackend.model.generated.transport.flight.flightPostInput_generated.FlightPersistInput;
 import com.codecool.projectegrandebackend.model.generated.transport.flight.flightPostInput_generated.FlightPostInput;
 import com.codecool.projectegrandebackend.repository.FlightTransportationRepository;
 import com.codecool.projectegrandebackend.repository.UserRepository;
@@ -42,6 +43,18 @@ public class FlightController {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
+//        flightTransportationRepository.save(flightTransportation);
+        return remoteCarbonInKg;
+    }
+
+    @PostMapping(
+            value = "/flight-transport/persist",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String saveFlightTransportToDB(@RequestBody FlightPersistInput inputData, Authentication authentication) {
+        Gson g = new Gson();
+        String jsonString = g.toJson(inputData);
+        String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
 
         FlightTransportation flightTransportation = FlightTransportation.builder()
                 .dateOfTravel(LocalDate.now())
@@ -51,12 +64,10 @@ public class FlightController {
                 .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
                 .build();
 
-
         AppUser appUser = (AppUser) authentication.getPrincipal();
         appUser.addJourney(flightTransportation);
         userRepository.save(appUser);
 
-//        flightTransportationRepository.save(flightTransportation);
         return remoteCarbonInKg;
     }
 }
