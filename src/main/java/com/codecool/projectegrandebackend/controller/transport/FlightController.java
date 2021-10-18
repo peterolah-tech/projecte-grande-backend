@@ -40,7 +40,7 @@ public class FlightController {
             value = "/flight-transport",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String getFlightTransport(@RequestBody FlightPostInput inputData, Authentication authentication) {
+    public String postFlightTransportRemote(@RequestBody FlightPostInput inputData, Authentication authentication) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
@@ -52,7 +52,7 @@ public class FlightController {
             value = "/flight-transport/persist",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String saveFlightTransportToDB(@RequestBody FlightPostInput inputData, Authentication authentication) {
+    public void saveFlightTransportToDB(@RequestBody FlightPostInput inputData, Authentication authentication) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
@@ -68,7 +68,5 @@ public class FlightController {
         AppUser appUser = (AppUser) authentication.getPrincipal();
         appUser.addJourney(flightTransportation);
         userRepository.save(appUser);
-
-        return remoteCarbonInKg;
     }
 }
