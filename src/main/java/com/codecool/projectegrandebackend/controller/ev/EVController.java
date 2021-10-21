@@ -21,16 +21,17 @@ public class EVController {
     private UserService userService;
 
     @GetMapping("api/v1/ev")
-    public Set<EV> getEV(){
-        return evService.getEVData();
+    public Set<EV> getEV(Authentication authentication){
+        AppUser user = (AppUser) authentication.getPrincipal();
+        return evService.getEVData(user);
     }
 
     @RequestMapping(value = "api/v1/ev", method = RequestMethod.POST)
     @ResponseBody
-    public String changeFavorite(@RequestBody EV ev, Authentication authentication){
+    public Set<EV> changeFavorite(@RequestBody EV ev, Authentication authentication){
         AppUser user = (AppUser) authentication.getPrincipal();
         evService.updateFavorite(ev, user);
-        return "success";
+        return getEV(authentication);
     }
 
     @PostMapping("api/v1/ev/coordinate")

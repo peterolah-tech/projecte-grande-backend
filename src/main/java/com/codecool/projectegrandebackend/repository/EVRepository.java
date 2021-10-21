@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
-import java.util.HashMap;
+
 
 public interface EVRepository extends JpaRepository<EV, Long> {
 
@@ -18,4 +17,7 @@ public interface EVRepository extends JpaRepository<EV, Long> {
 
     @Query(value = "select count(*) from users_evs where ev_id = ?1", nativeQuery = true)
     int findEVCountByDistinctEVId(Long evId);
+
+    @Query(value = "SELECT CASE WHEN count(*) > 0 THEN true ELSE false END  from users_evs where user_id = ?1 and ev_id = ?2", nativeQuery = true)
+    boolean existsByUserIdAAndEvId(Long userId, Long evId);
 }
