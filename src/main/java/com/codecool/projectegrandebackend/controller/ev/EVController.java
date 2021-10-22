@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -21,22 +22,30 @@ public class EVController {
     private UserService userService;
 
     @GetMapping("api/v1/ev")
-    public Set<EV> getEV(Authentication authentication){
+    public Set<EV> getEV(Authentication authentication) {
         AppUser user = (AppUser) authentication.getPrincipal();
         return evService.getEVData(user);
     }
 
     @RequestMapping(value = "api/v1/ev", method = RequestMethod.POST)
     @ResponseBody
-    public Set<EV> changeFavorite(@RequestBody EV ev, Authentication authentication){
+    public Set<EV> changeFavorite(@RequestBody EV ev, Authentication authentication) {
         AppUser user = (AppUser) authentication.getPrincipal();
         evService.updateFavorite(ev, user);
         return getEV(authentication);
     }
 
     @PostMapping("api/v1/ev/coordinate")
-    public String coordinate(@RequestParam float longitude, float latitude){
-        System.out.println(evService.setUrl(longitude,latitude));
+    public String coordinate(@RequestParam float longitude, float latitude) {
+        System.out.println(evService.setUrl(longitude, latitude));
         return "coordinate";
     }
+
+    @GetMapping("api/v1/ev/statistics")
+    public List<EV> statistics(Authentication authentication) {
+        AppUser user = (AppUser) authentication.getPrincipal();
+        return evService.getStatistics(user);
+    }
+
+
 }

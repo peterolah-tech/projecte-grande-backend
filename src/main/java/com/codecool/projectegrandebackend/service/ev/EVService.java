@@ -12,8 +12,8 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -99,5 +99,9 @@ public class EVService {
                 userRepository.saveAndFlush(appUser);
             }
         }
+    }
+
+    public List<EV> getStatistics(AppUser user) {
+        return evRepository.findEVSByAppUsers(user);
     }
 }
