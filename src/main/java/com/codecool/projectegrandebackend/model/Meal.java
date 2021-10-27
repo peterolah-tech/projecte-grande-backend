@@ -23,8 +23,12 @@ public class Meal {
 
     private int apiId;
 
+    // https://vegsoc.org/info-hub/why-go-veggie/environment/
     @Transient
-    private double emissionValue;
+    private static final double meatEmissionValue = 21.0;
+
+    @Transient
+    private static final double vegaEmissionValue = 8.4;
 
     @Singular
     @ManyToMany(mappedBy = "consumedMeals", cascade = {

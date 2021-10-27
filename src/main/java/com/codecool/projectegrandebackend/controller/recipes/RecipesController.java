@@ -5,6 +5,7 @@ import com.codecool.projectegrandebackend.model.Meal;
 import com.codecool.projectegrandebackend.model.generated.recipes.Recipes;
 import com.codecool.projectegrandebackend.repository.MealRepository;
 import com.codecool.projectegrandebackend.repository.UserRepository;
+import com.codecool.projectegrandebackend.service.recipes.MealService;
 import com.codecool.projectegrandebackend.service.recipes.RecipesApiService;
 import com.codecool.projectegrandebackend.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,7 @@ public class RecipesController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private MealRepository mealRepository;
+    private MealService mealService;
 
     @GetMapping("api/v1/recipes/{cuisine}/{diet}")
     public Recipes getRecipesByCuisineAndDiet(@PathVariable("cuisine") String cuisine, @PathVariable("diet") String diet) {
@@ -84,5 +82,10 @@ public class RecipesController {
 //        VehicleAppUser user = (VehicleAppUser) authentication.getPrincipal();
 //        return user.getUsername() + "\n" + user.getRoles();
 //    }
+
+    @GetMapping("api/v1/meal-summary/{userId}")
+    public int mealSummary(@PathVariable("userId") int userId) {
+        return mealService.getVegaMealNumber(userId);
+    }
 
 }
