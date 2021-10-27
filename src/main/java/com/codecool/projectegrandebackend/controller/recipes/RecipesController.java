@@ -45,13 +45,12 @@ public class RecipesController {
         String username = authentication.getName();
         String roles = authentication.getAuthorities().toString();
 
-        // Above works as well, below does not
-        Object principal = authentication.getPrincipal();
+        // Another way..
         AppUser user = (AppUser) authentication.getPrincipal();
 
         String mealId = formData.get("meal_id");
         int intMealId = Integer.parseInt(mealId);
-        Date mealDate = new SimpleDateFormat("dd/MM/yyyy").parse(formData.get("consumption_date"));
+        Date mealDate = new SimpleDateFormat("dd/MM/yyyy").parse(formData.get("consumption_date_formatted"));
 
         Meal meal = Meal.builder()
                 .apiId(intMealId)
