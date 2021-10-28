@@ -15,9 +15,6 @@ import java.util.Set;
 public class MealService {
 
     @Autowired
-    private MealRepository mealRepository;
-
-    @Autowired
     private UserRepository userRepository;
 
     public int getVegaMealNumber(long userId) {
@@ -25,6 +22,11 @@ public class MealService {
         Set<Meal> consumedMeals = user.getConsumedMeals();
         // TODO: filter for arbitrary date range..
         return consumedMeals.size();
+    }
+
+    public Set<Meal> getVegaMeals(long userId) {
+        AppUser user = userRepository.getById(userId);
+        return user.getConsumedMeals();
     }
 
 }

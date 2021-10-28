@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class RecipesController {
@@ -89,10 +90,13 @@ public class RecipesController {
     }
 
     @GetMapping("api/v1/meal-summary")
-    public int mealSummaryForUser(Authentication authentication) {
+    // public int mealSummaryForUser(Authentication authentication) {
+    public Set<Meal> mealSummaryForUser(Authentication authentication) {
         AppUser user = (AppUser) authentication.getPrincipal();
         Long userId = user.getId();
-        return mealService.getVegaMealNumber(userId);
+        // return mealService.getVegaMealNumber(userId);
+        Set<Meal> meals = mealService.getVegaMeals(userId);
+        return meals;
     }
 
 }
