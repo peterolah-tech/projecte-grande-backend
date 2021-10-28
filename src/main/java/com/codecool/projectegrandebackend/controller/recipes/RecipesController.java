@@ -88,4 +88,11 @@ public class RecipesController {
         return mealService.getVegaMealNumber(userId);
     }
 
+    @GetMapping("api/v1/meal-summary")
+    public int mealSummaryForUser(Authentication authentication) {
+        AppUser user = (AppUser) authentication.getPrincipal();
+        Long userId = user.getId();
+        return mealService.getVegaMealNumber(userId);
+    }
+
 }
