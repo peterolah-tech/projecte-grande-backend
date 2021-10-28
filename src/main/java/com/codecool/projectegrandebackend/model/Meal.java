@@ -21,6 +21,8 @@ public class Meal {
 
     private Date consumptionDate;
 
+    private String name;
+
     private int apiId;
 
     // https://vegsoc.org/info-hub/why-go-veggie/environment/

@@ -47,6 +47,7 @@ public class RecipesController {
         // Another way..
         AppUser user = (AppUser) authentication.getPrincipal();
 
+        String mealName = formData.get("meal_name");
         String mealId = formData.get("meal_id");
         int intMealId = Integer.parseInt(mealId);
         Date mealDate = new SimpleDateFormat("dd/MM/yyyy").parse(formData.get("consumption_date_formatted"));
@@ -54,6 +55,7 @@ public class RecipesController {
         Meal meal = Meal.builder()
                 .apiId(intMealId)
                 .consumptionDate(mealDate)
+                .name(mealName)
                 // .user(user)
                 .build();
 
