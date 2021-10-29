@@ -2,10 +2,8 @@ package com.codecool.projectegrandebackend.model;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -16,7 +14,8 @@ import javax.persistence.Id;
 public class FlightTransportation extends Transportation{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transport_generator")
+    @SequenceGenerator(name="transport_generator", sequenceName = "transport_seq")
     private Long id;
 
     private String airportFrom;

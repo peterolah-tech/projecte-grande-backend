@@ -15,7 +15,8 @@ import java.time.LocalDate;
 public class GroundTransportation extends Transportation{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transport_generator")
+    @SequenceGenerator(name="transport_generator", sequenceName = "transport_seq")
     private Long id;
 
     private double distance;

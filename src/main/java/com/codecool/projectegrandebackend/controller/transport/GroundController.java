@@ -35,8 +35,9 @@ public class GroundController {
     @PostMapping(
             value = "/ground-transport",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String postCarbonGroundRemote(@RequestBody GroundPostInput inputData, Authentication authentication) {
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public String postCarbonGroundRemote(@RequestBody GroundPostInput inputData) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
@@ -46,9 +47,10 @@ public class GroundController {
 
 
     @PostMapping(
-            value = "/ground-transport/persist",
+            path = "/ground-transport/persist",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE})
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
     public void saveCarbonGroundtoDB(@RequestBody GroundPostInput inputData, Authentication authentication) {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
