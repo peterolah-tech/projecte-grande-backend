@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FuelEfficiency{
 
-	@JsonProperty("of")
-	private String of;
+	@JsonProperty("value")
+	private int value;
 
 	@JsonProperty("units")
 	private String units;
 
-	@JsonProperty("value")
-	private int value;
+	@JsonProperty("of")
+	private String of;
 }

@@ -1,7 +1,6 @@
 package com.codecool.projectegrandebackend.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,7 +16,7 @@ import java.util.Set;
 public class AppUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -43,8 +42,8 @@ public class AppUser {
             inverseJoinColumns = @JoinColumn(name = "ev_id"))
     private Set<EV> evs = new HashSet<>();
 
-    @Singular
-    @OneToMany(cascade = {CascadeType.PERSIST})
+
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JoinTable(
@@ -52,4 +51,8 @@ public class AppUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "travel_id"))
     private Set<Transportation> journeys = new HashSet<>();
+
+    public void addJourney(Transportation journey) {
+        journeys.add(journey);
+    }
 }

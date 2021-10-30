@@ -5,11 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class GroundPostInput {
+
+	@JsonProperty("dateOfTravel")
+	private transient LocalDate dateOfTravel;
 
 	@JsonProperty("distance")
 	private Distance distance;
@@ -17,6 +22,10 @@ public class GroundPostInput {
 	@JsonProperty("fuel_efficiency")
 	private FuelEfficiency fuel_efficiency;
 
+
+	public LocalDate getDateOfTravel() {
+		return dateOfTravel;
+	}
 
 	public Distance getDistance(){
 		return distance;

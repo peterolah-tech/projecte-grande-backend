@@ -15,7 +15,8 @@ import java.time.LocalDate;
 public class GroundTransportation extends Transportation{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transport_generator")
+    @SequenceGenerator(name="transport_generator", sequenceName = "transport_seq")
     private Long id;
 
     private double distance;
@@ -25,21 +26,5 @@ public class GroundTransportation extends Transportation{
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
 
-//    @Builder
-//    public GroundTransportation(LocalDate dateOfTravel, float equivalentCarbonInKg, long id, double distance, double fuelEfficiency, FuelType fuelType) {
-//        super(dateOfTravel, equivalentCarbonInKg);
-//        this.id = id;
-//        this.distance = distance;
-//        this.fuelEfficiency = fuelEfficiency;
-//        this.fuelType = fuelType;
-//    }
-//
-//    @Builder
-//    public GroundTransportation(Long id, LocalDate dateOfTravel, float equivalentCarbonInKg, double distance, double fuelEfficiency, FuelType fuelType) {
-//        super(dateOfTravel, equivalentCarbonInKg);
-//        this.distance = distance;
-//        this.fuelEfficiency = fuelEfficiency;
-//        this.fuelType = fuelType;
-//    }
 }
 
