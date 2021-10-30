@@ -24,7 +24,8 @@ public class EVController {
     @GetMapping("api/v1/ev")
     public Set<EV> getEV(Authentication authentication) {
         AppUser user = (AppUser) authentication.getPrincipal();
-        return evService.getEVData(user);
+        Set<EV> allEVs = evService.getEVData(user);
+        return allEVs;
     }
 
     @RequestMapping(value = "api/v1/ev", method = RequestMethod.POST)
