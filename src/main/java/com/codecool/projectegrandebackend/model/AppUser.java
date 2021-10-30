@@ -42,6 +42,20 @@ public class AppUser {
             inverseJoinColumns = @JoinColumn(name = "ev_id"))
     private Set<EV> evs = new HashSet<>();
 
+    // For the food feature
+    @Singular
+    @ManyToMany(cascade = {
+            CascadeType.ALL
+    }, fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinTable(
+            name = "users_meals",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "meal_id"))
+
+    private Set<Meal> consumedMeals;
+    // private Set<Meal> consumedMeals = new HashSet<>();
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude

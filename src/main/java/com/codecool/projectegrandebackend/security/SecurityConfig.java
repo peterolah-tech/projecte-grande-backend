@@ -29,7 +29,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .antMatchers("/api/v1/auth/signin").permitAll() // allowed by anyone
                 .antMatchers("/api/v1/signin").permitAll() // allowed by anyone
                 .antMatchers("/api/v1/registration").permitAll() // allowed by anyone
+                .antMatchers("/api/v1/meal-summary/**").permitAll() // allowed by anyone
                 // .antMatchers("/api/v1/").permitAll() // allowed by anyone
+
+                .antMatchers(HttpMethod.POST, "/api/v1/add-meal").authenticated() // allowed only when signed in
+                .antMatchers(HttpMethod.GET, "/api/v1/add-meal").authenticated() // allowed only when signed in
+                .antMatchers(HttpMethod.POST, "api/v1/add-meal").authenticated() // allowed only when signed in
+                .antMatchers(HttpMethod.GET, "api/v1/add-meal").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.GET, "/api/v1/recipes/**").authenticated() // allowed only when signed in
 //                .antMatchers(HttpMethod.GET, "/api/v1/ground-transport/**").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.POST, "/api/v1/ground-transport/**").authenticated() // allowed only when signed in
