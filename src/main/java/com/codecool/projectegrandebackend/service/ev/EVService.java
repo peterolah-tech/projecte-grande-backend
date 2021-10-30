@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -36,7 +37,7 @@ public class EVService {
         return url;
     }
 
-    public Set<EV> getEVData() {
+    public Set<EV> getEVData(AppUser user) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
@@ -49,16 +50,22 @@ public class EVService {
                 new ParameterizedTypeReference<Set<EVResponseItem>>() {
                 });
         Set<EVResponseItem> evResponse = evResponseEntity.getBody();
-           createEVList(evResponse);
+           createEVList(evResponse, user);
            return evList;
 //        return evRepository.findAll();
     }
 
-    private void createEVList(Set<EVResponseItem> evs){
+    private void createEVList(Set<EVResponseItem> evs, AppUser user){
         evList = new HashSet<>();
         for(EVResponseItem evResponse: evs){
             if(evRepository.existsByEvId(evResponse.getAddressInfo().getID())){
+
                 EV existEv= evRepository.findEVByEvId(evResponse.getAddressInfo().getID());
+                int likedNumber= evRepository.findEVCountByDistinctEVId(existEv.getId());
+                existEv.setLikedNumber(likedNumber);
+                if(evRepository.existsByUserIdAAndEvId(user.getId(), existEv.getId())){
+                    existEv.setFavorite(true);
+                }
                 evList.add(existEv);
             }else{
                 EV actualEV = createEV(evResponse);
@@ -75,6 +82,7 @@ public class EVService {
                 .latitude(evResponse.getAddressInfo().getLatitude())
                 .longitude(evResponse.getAddressInfo().getLongitude())
                 .title(evResponse.getAddressInfo().getTitle())
+                .likedNumber(0)
                 .favorite(false)
                 .build();
 
@@ -84,12 +92,16 @@ public class EVService {
     public void updateFavorite(EV updateEV, AppUser appUser) {
         for(EV ev: evList){
             if(ev.getEvId().equals(updateEV.getEvId())){
-                boolean favorite = updateEV.isFavorite();
-                ev.setFavorite(!favorite);
+                ev.setLikedNumber(ev.getLikedNumber() + 1);
+                ev.setAppUsers(Set.of(appUser));
                 evRepository.save(ev);
                 appUser.getEvs().add(ev);
-                userRepository.save(appUser);
+                userRepository.saveAndFlush(appUser);
             }
         }
+    }
+
+    public List<EV> getStatistics(AppUser user) {
+        return evRepository.findEVSByAppUsers(user);
     }
 }
