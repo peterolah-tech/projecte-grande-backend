@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 public class EV {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Integer evId;
@@ -23,10 +23,13 @@ public class EV {
     private double latitude;
     private double longitude;
     private String title;
+    private int likedNumber;
+
+    @Transient
     private boolean favorite;
 
     @Singular
-    @ManyToMany(mappedBy = "evs", cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "evs", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @JsonIgnore
     private Set<AppUser> appUsers = new HashSet<>();

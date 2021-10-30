@@ -37,10 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "api/v1/add-meal").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.GET, "api/v1/add-meal").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.GET, "/api/v1/recipes/**").authenticated() // allowed only when signed in
-                .antMatchers(HttpMethod.GET, "/api/v1/ground-transport/**").authenticated() // allowed only when signed in
+//                .antMatchers(HttpMethod.GET, "/api/v1/ground-transport/**").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.POST, "/api/v1/ground-transport/**").authenticated() // allowed only when signed in
-                .antMatchers(HttpMethod.GET, "/api/v1/flight/**").authenticated() // allowed only when signed in
-                .antMatchers(HttpMethod.POST, "/api/v1/flight/**").authenticated() // allowed only when signed in
+//                .antMatchers(HttpMethod.GET, "/api/v1/flight-transport/**").authenticated() // allowed only when signed in
+                .antMatchers(HttpMethod.POST, "/api/v1/flight-transport/**").authenticated() // allowed only when signed in
+                .antMatchers(HttpMethod.POST, "/api/v1/airports").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/ev/**").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.POST, "/api/v1/ev/**").authenticated() // allowed only when signed in
                 .antMatchers(HttpMethod.GET, "/api/v1/username").authenticated() // allowed only when signed in

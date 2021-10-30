@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("api/v1")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;

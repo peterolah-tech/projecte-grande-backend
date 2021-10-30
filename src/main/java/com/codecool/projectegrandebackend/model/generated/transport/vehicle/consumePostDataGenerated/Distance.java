@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Distance{
 
+	@JsonProperty("value")
+	private int value;
+
 	@JsonProperty("units")
 	private String units;
 
-	@JsonProperty("value")
-	private int value;
 }

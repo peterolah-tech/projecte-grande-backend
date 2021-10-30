@@ -1,43 +1,29 @@
 package com.codecool.projectegrandebackend.model;
 
-import com.codecool.projectegrandebackend.model.generated.transport.vehicle.FuelType;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
+
 @AllArgsConstructor
-@Builder
+@Getter
+@NoArgsConstructor
+@SuperBuilder
+//@MappedSuperclass
 @Entity
-public class Transportation {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Transportation {
 
     @Id
     @GeneratedValue
-    private long id;
-    
-    //private long userID;
+    private Long id;
 
-    private LocalDate dateOfTravel;
+    protected LocalDate dateOfTravel;
 
-    private double distance;
+    protected float equivalentCarbonInKg;
 
-    private double fuelEfficiency;
-
-    @Enumerated(EnumType.STRING)
-    private FuelType fuelType;
-
-    private float vehicleCarbonInKg;
-
-
-    private float flightCarbonInKg;
-
-    private String airportFrom;
-    private String airportThrough;
-    private String airportTo;
 
 }
