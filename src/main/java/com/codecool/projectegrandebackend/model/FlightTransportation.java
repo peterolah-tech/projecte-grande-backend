@@ -1,5 +1,6 @@
 package com.codecool.projectegrandebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -21,5 +22,10 @@ public class FlightTransportation extends Transportation{
     private String airportFrom;
     private String airportThrough;
     private String airportTo;
+
+    @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore
+    private AppUser user;
 
 }

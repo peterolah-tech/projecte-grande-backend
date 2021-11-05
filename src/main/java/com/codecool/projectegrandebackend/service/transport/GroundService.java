@@ -1,15 +1,24 @@
 package com.codecool.projectegrandebackend.service.transport;
 
+import com.codecool.projectegrandebackend.model.AppUser;
+import com.codecool.projectegrandebackend.model.GroundTransportation;
 import com.codecool.projectegrandebackend.model.generated.transport.vehicle.GroundTransport;
+import com.codecool.projectegrandebackend.repository.GroundTransportationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 @RestController
 public class GroundService {
+
+    @Autowired
+    private GroundTransportationRepository groundTransportationRepository;
 
     @Value("${REACT_APP_API_KEY_CLOVERLY}")
     private String API_KEY_CLOVERLY;
@@ -27,4 +36,8 @@ public class GroundService {
         return groundResponseEntity.getBody();
     }
 
+    public List<GroundTransportation> getStatistics(AppUser user) {
+        List<GroundTransportation> vehicleTravels = groundTransportationRepository.findAllByUser(user);
+        return vehicleTravels;
+    }
 }
