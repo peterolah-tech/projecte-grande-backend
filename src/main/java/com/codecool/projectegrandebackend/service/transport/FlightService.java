@@ -1,8 +1,12 @@
 package com.codecool.projectegrandebackend.service.transport;
 
 import com.codecool.projectegrandebackend.model.Airport;
+import com.codecool.projectegrandebackend.model.AppUser;
+import com.codecool.projectegrandebackend.model.FlightTransportation;
+import com.codecool.projectegrandebackend.model.GroundTransportation;
 import com.codecool.projectegrandebackend.model.generated.transport.flight.FlightTransport;
 import com.codecool.projectegrandebackend.repository.AirportRepository;
+import com.codecool.projectegrandebackend.repository.FlightTransportationRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +31,8 @@ public class FlightService {
     private String url;
     @Autowired
     private AirportRepository airportRepository;
+    @Autowired
+    private FlightTransportationRepository flightTransportationRepository;
 
     public String sendAirports() throws IOException {
         List<Airport> foundAirports = airportRepository.findAll();
@@ -42,6 +48,11 @@ public class FlightService {
         headers.add("Authorization",  API_KEY_CLOVERLY);
         ResponseEntity<FlightTransport> flightResponseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, FlightTransport.class);
         return flightResponseEntity.getBody();
+    }
+
+    public List<FlightTransportation> getStatistics(AppUser user) {
+        List<FlightTransportation> flightTravels = flightTransportationRepository.findAllByUser(user);
+        return flightTravels;
     }
 
 }

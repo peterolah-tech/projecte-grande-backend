@@ -53,6 +53,8 @@ public class FlightController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public void saveFlightTransportToDB(@RequestBody FlightPostInput inputData, Authentication authentication) {
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = flightService.getFlightData(jsonString).getEquivalentCarbonInKg();
@@ -63,9 +65,9 @@ public class FlightController {
                 .airportThrough(inputData.getAirports().get(1))
                 .airportTo(inputData.getAirports().get(2))
                 .equivalentCarbonInKg(Float.parseFloat(remoteCarbonInKg))
+                .user(appUser)
                 .build();
 
-        AppUser appUser = (AppUser) authentication.getPrincipal();
         appUser.addJourney(flightTransportation);
         userRepository.save(appUser);
     }

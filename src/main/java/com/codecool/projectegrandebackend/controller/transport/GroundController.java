@@ -11,10 +11,9 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("api/v1")
 @RestController
@@ -41,7 +40,6 @@ public class GroundController {
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
-//        groundTransportationRepository.save(groundTransportation);
         return remoteCarbonInKg;
     }
 
@@ -52,6 +50,8 @@ public class GroundController {
             produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void saveCarbonGroundtoDB(@RequestBody GroundPostInput inputData, Authentication authentication) {
+        AppUser appUser = (AppUser) authentication.getPrincipal();
+
         Gson g = new Gson();
         String jsonString = g.toJson(inputData);
         String remoteCarbonInKg = groundService.getGroundData(jsonString).getEquivalentCarbonInKg();
@@ -62,9 +62,10 @@ public class GroundController {
                 .fuelType(fuelType == "diesel" ? FuelType.DIESEL : FuelType.GASOLINE)
                 .distance(inputData.getDistance().getValue())
                 .dateOfTravel(inputData.getDateOfTravel())
+                .user(appUser)
                 .build();
 
-        AppUser appUser = (AppUser) authentication.getPrincipal();
+
         appUser.addJourney(groundTransportation);
         userRepository.save(appUser);
     }
