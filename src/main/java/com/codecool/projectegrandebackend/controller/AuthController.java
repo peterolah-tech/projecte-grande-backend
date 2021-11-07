@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "https://elastic-swanson-97dbbe.netlify.app", maxAge = 3600)
 @RestController
 @RequestMapping("api/v1")
 public class AuthController {
