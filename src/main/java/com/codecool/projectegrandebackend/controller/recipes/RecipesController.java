@@ -107,4 +107,10 @@ public class RecipesController {
         return "Hi there! This is permitted by Peter and therefore, works.";
     }
 
+    @GetMapping("api/v1/test-security2")
+    // public int mealSummaryForUser(Authentication authentication) {
+    public String checkIfWorks2() {
+        return userService.findByUserName("test_bela").getUsername();
+    }
+
 }
