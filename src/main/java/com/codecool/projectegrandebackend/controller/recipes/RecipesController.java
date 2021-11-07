@@ -101,4 +101,10 @@ public class RecipesController {
         return meals;
     }
 
+    @GetMapping("api/v1/test-security")
+    // public int mealSummaryForUser(Authentication authentication) {
+    public String checkIfWorks() {
+        return "Hi there! This is permitted by Peter and therefore, works.";
+    }
+
 }
